@@ -2,6 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { Star } from 'lucide-react'
 
 type CourseDetailPageProps = {
@@ -13,8 +15,13 @@ type CourseDetailPageProps = {
 const CourseDetailPage = ({ params }: CourseDetailPageProps) => {
   return (
     <div className='flex-1 flex border w-full overflow-hidden '>
-      <div className='p-8 text-2xl w-1/6 border '>
+      <div className='p-8 text-2xl w-1/5 border '>
         <p className='font-semibold text-center'>Filter</p>
+        <Input type='text' placeholder='Search tutor name' className='w-full my-4' />
+        <div className='flex items-center gap-4'>
+          <Label>Year of Experience</Label>
+          <Input type='number' placeholder='10' className='w-1/3 my-4' />
+        </div>
       </div>
 
       <div className='flex-1 p-8 overflow-y-auto bg-[#F5F7F8]'>

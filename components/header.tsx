@@ -24,9 +24,15 @@ const Header = () => {
         <div className='text-[#7A37FF]'>Trang chủ</div>
         <div>Tất cả dịch vụ</div>
       </div>
+
       <div className='flex items-center gap-4'>
         <Input type='text' placeholder='Search' />
-        <Button onClick={() => router.push('/sign-in')}>Đăng nhập</Button>
+        <Button
+          onClick={() => router.push('/sign-in')}
+          className='text-white font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
+        >
+          Đăng nhập
+        </Button>
       </div>
     </div>
   )
