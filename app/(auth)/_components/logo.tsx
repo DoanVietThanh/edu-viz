@@ -1,6 +1,7 @@
 import React from 'react'
 import { Poppins } from 'next/font/google'
 import Image from 'next/image'
+
 import { cn } from '@/lib/utils'
 
 const font = Poppins({

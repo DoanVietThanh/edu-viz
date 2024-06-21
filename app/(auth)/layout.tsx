@@ -1,4 +1,5 @@
 import { Suspense } from 'react'
+
 import Logo from './_components/logo'
 import { Loader } from 'lucide-react'
 
