@@ -21,15 +21,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        elements: {
+          formButtonPrimary: 'bg-primary text-gradient-foreground !shadow-none'
+        }
+      }}
+    >
       <html lang='en'>
-        <body className={inter.className}>
-          <div className='flex flex-col min-h-[100vh]'>
-            <Header />
-            <div className='flex-1 flex flex-col'>{children}</div>
-            <Footer />
-          </div>
-        </body>
+        <body className={inter.className}>{children}</body>
       </html>
     </ClerkProvider>
   )

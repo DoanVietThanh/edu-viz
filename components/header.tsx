@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 
 import { Button } from './ui/button'
 import { Input } from './ui/input'
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 const Header = () => {
   const router = useRouter()
@@ -25,15 +26,21 @@ const Header = () => {
         <div>Tất cả dịch vụ</div>
       </div>
 
-      <div className='flex items-center gap-4'>
-        <Input type='text' placeholder='Search' />
-        <Button
-          onClick={() => router.push('/sign-in')}
-          className='text-white font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
-        >
-          Đăng nhập
-        </Button>
-      </div>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+
+      <SignedOut>
+        <div className='flex items-center gap-4'>
+          <Input type='text' placeholder='Search' />
+          <Button
+            onClick={() => router.push('/sign-in')}
+            className='text-white font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
+          >
+            Đăng nhập
+          </Button>
+        </div>
+      </SignedOut>
     </div>
   )
 }

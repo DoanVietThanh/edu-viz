@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className='flex-1 flex justify-center items-center'>
       <Button asChild>
-        <Link href='/home'>Welcome to EduViz </Link>
+        <Link href='/home'>Welcome to EduViz</Link>
       </Button>
     </div>
   )
