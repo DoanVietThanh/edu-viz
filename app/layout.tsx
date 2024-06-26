@@ -1,7 +1,7 @@
+import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
-import Footer from '@/components/footer'
 import Header from '@/components/header'
 import { ClerkProvider } from '@clerk/nextjs'
 
@@ -18,16 +18,15 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
   return (
     <ClerkProvider>
       <html lang='en'>
         <body className={inter.className}>
-          <div className='flex flex-col min-h-[100vh]'>
+          <div className='flex flex-col h-screen'>
             <Header />
             <div className='flex-1 flex flex-col'>{children}</div>
-            <Footer />
           </div>
         </body>
       </html>
