@@ -1,13 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { Button } from './ui/button'
 import { Input } from './ui/input'
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { currentUser } from '@clerk/nextjs/server'
 
 const Header = async () => {
-  const user = await currentUser()
-  console.log('🚀 ~ Header ~ user:', user)
   return (
     <div className='flex justify-between items-center font-semibold gap-4 border p-4 shadow-lg'>
       <div className='flex items-center gap-8'>
@@ -24,26 +23,21 @@ const Header = async () => {
         <div>Tất cả dịch vụ</div>
       </div>
 
-      <div className='flex items-center gap-4'>
-        <Input type='text' placeholder='Search' />
-        <header>
-          <SignedOut>
-            <SignInButton />
-          </SignedOut>
-          <SignedIn>
-            <div className='flex items-center'>
-              <p className='text-[#7A37FF] mr-4 flex whitespace-nowrap'>{`${user?.firstName} ${user?.lastName}`}</p>
-              <UserButton />
-            </div>
-          </SignedIn>
-        </header>
-        {/* <Button
-          onClick={() => router.push('/sign-in')}
-          className='text-white font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
-        >
-          Đăng nhập
-        </Button> */}
-      </div>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+
+      <SignedOut>
+        <div className='flex items-center gap-4'>
+          <Input type='text' placeholder='Search' />
+          <Button
+            className='text-white font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
+            asChild
+          >
+            <Link href='/sign-in'>Đăng nhập</Link>
+          </Button>
+        </div>
+      </SignedOut>
     </div>
   )
 }
