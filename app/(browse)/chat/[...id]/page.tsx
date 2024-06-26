@@ -14,7 +14,7 @@ type ChatPageProps = {
 
 const ChatPage = ({ params }: ChatPageProps) => {
   return (
-    <div className='flex h-full bg-red-200 overflow-hidden'>
+    <div className='flex bg-red-200 overflow-hidden h-full'>
       <SidebarChat />
       <div className='flex-1 flex'>
         <div className='flex-1 flex flex-col'>

@@ -8,7 +8,7 @@ import { currentUser } from '@clerk/nextjs/server'
 
 const Header = async () => {
   return (
-    <div className='flex justify-between items-center font-semibold gap-4 border p-4 shadow-lg'>
+    <div className='fixed w-full flex justify-between items-center font-semibold gap-4 border p-4 shadow-lg bg-white'>
       <div className='flex items-center gap-8'>
         <Link href='/home'>
           <Image

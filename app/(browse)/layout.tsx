@@ -7,9 +7,9 @@ export default function BrowseLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div className='flex flex-col min-h-[100vh]'>
+    <div className='relative'>
       <Header />
-      <div className='flex-1 flex flex-col'>{children}</div>
+      <div className='flex flex-col h-screen pt-20'>{children}</div>
       {/* <Footer /> */}
     </div>
   )

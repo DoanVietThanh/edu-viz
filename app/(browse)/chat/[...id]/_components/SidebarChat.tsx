@@ -4,13 +4,13 @@ import { AvatarImage } from '@radix-ui/react-avatar'
 
 const SidebarChat = () => {
   return (
-    <div className='w-72 border-r-2 border-slate-200  bg-white flex flex-col overflow-y-auto'>
+    <div className='w-72 border-r-2 border-slate-200 bg-white flex flex-col overflow-y-auto h-screen pb-20'>
       <div className='mb-4 p-2 h-[40px]'>
         <Input placeholder='Search user' />
       </div>
 
       <div className='flex-1 flex flex-col '>
-        {Array.from({ length: 4 }).map((i, index) => (
+        {Array.from({ length: 30 }).map((i, index) => (
           <div key={index} className='flex items-center gap-4 border px-4 py-2 hover:bg-slate-200 cursor-pointer'>
             <Avatar>
               <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
