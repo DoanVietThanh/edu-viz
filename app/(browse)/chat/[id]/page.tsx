@@ -1,13 +1,15 @@
-import React from 'react'
+import NotFoundPage from './not-found'
 import { redirect } from 'next/navigation'
+import React from 'react'
 
 import ContentChat from './_components/content-chat'
+
+import { getHubs } from '@/actions/chat/get-hubs'
+
 import HeaderChat from './_components/header-chat'
 import InfoMessage from './_components/info-message'
 import InputChat from './_components/input-chat'
 import SidebarChat from './_components/sidebar-chat'
-import NotFoundPage from './not-found'
-import { getHubs } from '@/actions/chat/get-hubs'
 
 type ChatPageProps = {
   params: {
@@ -28,10 +30,10 @@ const ChatPage = async ({ params }: ChatPageProps) => {
   }
 
   return (
-    <div className='flex bg-red-200 overflow-hidden h-full'>
+    <div className='flex h-full overflow-hidden bg-red-200'>
       <SidebarChat activeHubId={hubId} hubs={hubs} />
-      <div className='flex-1 flex'>
-        <div className='flex-1 flex flex-col'>
+      <div className='flex flex-1'>
+        <div className='flex flex-1 flex-col'>
           <HeaderChat />
           <ContentChat />
           <InputChat />

@@ -1,14 +1,14 @@
+import { Edit, Heart, Trash } from 'lucide-react'
 import React from 'react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Edit, Heart, Trash } from 'lucide-react'
 
 const FeedbackList = () => {
   return (
     <div className='flex flex-col gap-4'>
       {[1, 2].map((i) => (
-        <div key={i} className={`flex flex-col gap-2 border p-4 rounded-2xl shadow-lg hover:bg-slate-100`}>
-          <div className='flex gap-4 justify-between items-center px-4'>
+        <div key={i} className={`flex flex-col gap-2 rounded-2xl border p-4 shadow-lg hover:bg-slate-100`}>
+          <div className='flex items-center justify-between gap-4 px-4'>
             <div className='flex items-center gap-4'>
               <Avatar>
                 <AvatarImage src={`/assets/avatar-student.jpg`} alt='@shadcn' />
@@ -22,13 +22,13 @@ const FeedbackList = () => {
                 <div className='italic'>Ratings {Array.from({ length: 5 }).map(() => '⭐️')}</div>
               </div>
             </div>
-            <div className='flex gap-4 items-center'>
-              <Edit className='mr-2 h-6 w-6' />
-              <Trash className='h-6 w-6' />
+            <div className='flex items-center gap-4'>
+              <Edit className='mr-2 size-6' />
+              <Trash className='size-6' />
             </div>
           </div>
-          <div className='p-4 font-medium flex gap-4'>
-            I love this guy so much <Heart className='h-6 w-6' color='red' fill='red' />
+          <div className='flex gap-4 p-4 font-medium'>
+            I love this guy so much <Heart className='size-6' color='red' fill='red' />
           </div>
         </div>
       ))}

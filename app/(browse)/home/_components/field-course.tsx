@@ -1,9 +1,10 @@
 'use client'
+
+import { fieldCourses, moreFieldCourses } from '@/shared/field-courses-dummy'
 import React, { useState } from 'react'
 
 import CourseList from '@/components/course-list'
 import { Button } from '@/components/ui/button'
-import { fieldCourses, moreFieldCourses } from '@/shared/field-courses-dummy'
 
 const FieldCourse = () => {
   const dummyData = fieldCourses
@@ -20,7 +21,7 @@ const FieldCourse = () => {
         moreDummyData?.map((item) => (
           <CourseList courseId={item.id} key={item.id} title={item.nameCourse} tutors={item.tutors} />
         ))}
-      <div className='flex justify-center my-8'>
+      <div className='my-8 flex justify-center'>
         <Button variant='default' onClick={() => setIsMore(!isMore)}>
           {!isMore ? 'Xem thêm' : 'Thu gọn'}
         </Button>

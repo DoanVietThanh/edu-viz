@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea'
 const TutorComment = () => {
   return (
     <div>
-      <h1 className='text-2xl text-center font-semibold font-serif'>Comment</h1>
+      <h1 className='text-center font-serif text-2xl font-semibold'>Comment</h1>
       <Textarea className='my-4 p-4' placeholder='Comment' rows={5} />
       <div className='flex justify-end'>
         <Button variant='primary' className=''>

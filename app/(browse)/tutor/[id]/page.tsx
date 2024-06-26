@@ -2,7 +2,9 @@ import FeedbackList from './feedback-list'
 import TutorBreadcum from './tutor-breadcrum'
 import TutorComment from './tutor-comment'
 import TutorInfo from './tutor-info'
+
 import Footer from '@/components/footer'
+
 const TutorDetailPage = () => {
   return (
     <div>

@@ -1,10 +1,9 @@
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-
 import { Button } from './ui/button'
 import { TutorType } from '@/types/tutor'
 import { Activity, Earth, User } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
 
 type CourseListProps = {
   courseId: string
@@ -21,12 +20,12 @@ const CourseList = ({ title, tutors, courseId }: CourseListProps) => {
           <Link href={`/course/${courseId}`}>Xem thêm</Link>
         </Button>
       </div>
-      <div className='my-4 grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+      <div className='my-4 grid gap-8 md:grid-cols-2 lg:grid-cols-3'>
         {tutors.map((tutor, index) => (
           <Link href={`/tutor/${tutor.id}`} key={index}>
             <div
               key={tutor.id}
-              className='flex gap-8 p-4 border rounded-md shadow-md cursor-pointer hover:font-semibold hover:scale-105 transition-all ease-in-out duration-300'
+              className='flex cursor-pointer gap-8 rounded-md border p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105 hover:font-semibold'
             >
               <div className='flex items-center justify-between overflow-hidden'>
                 <Image

@@ -1,21 +1,21 @@
+import { ArrowBigRight, Circle, Phone, VideoIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { ArrowBigRight, Circle, Phone, VideoIcon } from 'lucide-react'
 
 const HeaderChat = () => {
   return (
-    <div className='p-4 bg-white flex justify-between'>
+    <div className='flex justify-between bg-white p-4'>
       <div className='flex gap-4'>
         <Avatar>
           <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
           <AvatarFallback>A</AvatarFallback>
         </Avatar>
         <div className='flex flex-col'>
-          <Link href='/' className='text-md font-semibold'>
+          <Link href='/' className='font-semibold'>
             ThanhDoan
           </Link>
-          <p className='text-sm text-foreground text-ellipsis line-clamp-1 flex gap-2 items-center'>
+          <p className='line-clamp-1 flex items-center gap-2 text-ellipsis text-sm text-foreground'>
             <Circle color='green' size={10} fill='green' /> Active
           </p>
         </div>

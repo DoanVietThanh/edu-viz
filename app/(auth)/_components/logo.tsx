@@ -1,8 +1,7 @@
-import React from 'react'
+import { cn } from '@/lib/utils'
 import { Poppins } from 'next/font/google'
 import Image from 'next/image'
-
-import { cn } from '@/lib/utils'
+import React from 'react'
 
 const font = Poppins({
   subsets: ['latin'],

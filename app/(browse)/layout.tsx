@@ -1,4 +1,3 @@
-import Footer from '@/components/footer'
 import Header from '@/components/header'
 
 export default function BrowseLayout({
@@ -9,8 +8,7 @@ export default function BrowseLayout({
   return (
     <div className='relative'>
       <Header />
-      <div className='flex flex-col h-screen pt-20'>{children}</div>
-      {/* <Footer /> */}
+      <div className='flex h-screen flex-col pt-20'>{children}</div>
     </div>
   )
 }

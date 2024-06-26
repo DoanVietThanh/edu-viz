@@ -1,7 +1,8 @@
+import { Activity, Earth, User } from 'lucide-react'
 import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
-import { Activity, Earth, User } from 'lucide-react'
+
 const RecommendStudents = () => {
   return (
     <div className='container mt-8'>
@@ -9,8 +10,8 @@ const RecommendStudents = () => {
         <p className='text-2xl font-semibold'>Tìm bạn học</p>
         <Button variant='link'>Xem thêm</Button>
       </div>
-      <div className='my-4 grid md:grid-cols-2 gap-8'>
-        <div className='flex gap-8 p-4 border rounded-md shadow-md cursor-pointer hover:scale-110 transition-all ease-in-out duration-300'>
+      <div className='my-4 grid gap-8 md:grid-cols-2'>
+        <div className='flex cursor-pointer gap-8 rounded-md border p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-110'>
           <div className='flex items-center justify-between'>
             <Image
               src='/assets/avatar-student.jpg'
@@ -35,7 +36,7 @@ const RecommendStudents = () => {
           </div>
         </div>
 
-        <div className='flex gap-8 p-4 border rounded-md shadow-md cursor-pointer hover:scale-110 transition-all ease-in-out duration-300'>
+        <div className='flex cursor-pointer gap-8 rounded-md border p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-110'>
           <div className='flex items-center justify-between'>
             <Image
               src='/assets/avatar-student.jpg'
