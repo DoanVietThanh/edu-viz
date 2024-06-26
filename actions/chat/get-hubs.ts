@@ -1,11 +1,9 @@
 'use server'
 
+import { HubDetail } from './get-hub'
 import { auth } from '@clerk/nextjs/server'
-import { Message, User } from '@prisma/client'
 
 import { SERVER_URL } from '@/constants/env-config'
-
-export type HubDetail = { currentUser: User; otherUser: User; lastMessage: Message; id: string }
 
 export const getHubs = async () => {
   const { getToken } = auth()

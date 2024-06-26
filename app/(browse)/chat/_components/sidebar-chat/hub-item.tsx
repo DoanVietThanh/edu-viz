@@ -1,16 +1,15 @@
-import { HubDetail } from '@/actions/chat/get-hubs'
+import { HubDetail } from '@/actions/chat/get-hub'
 import { cn } from '@/lib/utils'
 import moment from 'moment'
 import Link from 'next/link'
 import React from 'react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Skeleton } from '@/components/ui/skeleton'
 
-type Props = HubDetail & {
-  active: boolean
-}
+type Props = HubDetail
 
-function HubItem({ currentUser, id, lastMessage, otherUser, active }: Props) {
+function HubItem({ currentUser, id, lastMessage, otherUser }: Props) {
   let messageContent = lastMessage.senderId === currentUser.id ? 'You' : otherUser.fullName.split(' ').at(-1)
 
   switch (lastMessage.type) {
@@ -48,8 +47,8 @@ function HubItem({ currentUser, id, lastMessage, otherUser, active }: Props) {
     <Link
       href={`/chat/${id}`}
       className={cn(
-        'flex cursor-pointer items-center gap-4 border px-4 py-2 hover:bg-slate-200',
-        active && 'bg-slate-200'
+        'flex cursor-pointer items-center gap-4 border px-4 py-2 hover:bg-slate-200'
+        // active && 'bg-slate-200'
       )}
     >
       <div className='relative'>
@@ -78,3 +77,16 @@ function HubItem({ currentUser, id, lastMessage, otherUser, active }: Props) {
 }
 
 export default HubItem
+
+export function HubItemSkeleton() {
+  return (
+    <div className='flex cursor-pointer items-center gap-4 border px-4 py-2'>
+      <Skeleton className='size-14 rounded-full'></Skeleton>
+
+      <div className='flex flex-1 flex-col gap-y-1'>
+        <Skeleton className='h-6 w-full'></Skeleton>
+        <Skeleton className='h-5 w-full'></Skeleton>
+      </div>
+    </div>
+  )
+}

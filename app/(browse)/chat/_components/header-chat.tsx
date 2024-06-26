@@ -1,26 +1,28 @@
-import { User } from '@prisma/client'
+import { getHub } from '@/actions/chat/get-hub'
 import { ArrowBigRight, Phone, VideoIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 type Props = {
-  otherUser: User
+  hubId: string
 }
 
-const HeaderChat = ({ otherUser }: Props) => {
+const HeaderChat = async ({ hubId }: Props) => {
+  const hub = await getHub(hubId)
+
   return (
     <div className='flex justify-between bg-white p-4'>
       <div className='flex gap-4'>
         <Avatar>
-          <AvatarImage src={otherUser.avatar} alt='@shadcn' />
+          <AvatarImage src={hub.otherUser.avatar} alt='@shadcn' />
           <AvatarFallback>A</AvatarFallback>
         </Avatar>
         <div className='flex flex-col justify-center gap-y-1'>
           <Link href='/' className='font-semibold leading-none'>
-            {otherUser.fullName}
+            {hub.otherUser.fullName}
           </Link>
-          {!otherUser.tutor?.isAvailable && (
+          {!hub.otherUser.tutor?.isAvailable && (
             <div className='line-clamp-1 flex items-center gap-2 text-ellipsis text-sm leading-none text-foreground'>
               <div className='size-2 rounded-full bg-green-500'></div> Available
             </div>
