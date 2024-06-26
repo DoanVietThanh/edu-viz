@@ -1,7 +1,7 @@
+import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
-import Footer from '@/components/footer'
 import Header from '@/components/header'
 import { ClerkProvider } from '@clerk/nextjs'
 
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
   return (
     <ClerkProvider

@@ -1,15 +1,12 @@
-'use client'
-import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { currentUser } from '@clerk/nextjs/server'
 
-const Header = () => {
-  const router = useRouter()
+const Header = async () => {
   return (
     <div className='flex justify-between items-center font-semibold gap-4 border p-4 shadow-lg'>
       <div className='flex items-center gap-8'>
@@ -34,10 +31,10 @@ const Header = () => {
         <div className='flex items-center gap-4'>
           <Input type='text' placeholder='Search' />
           <Button
-            onClick={() => router.push('/sign-in')}
             className='text-white font-semibold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'
+            asChild
           >
-            Đăng nhập
+            <Link href='/sign-in'>Đăng nhập</Link>
           </Button>
         </div>
       </SignedOut>
