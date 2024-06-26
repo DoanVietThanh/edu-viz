@@ -8,14 +8,7 @@ const TutorInfo = () => {
   return (
     <div className='flex flex-1 justify-center gap-8 p-8'>
       <div className='overflow-hidden rounded-lg p-4 shadow-lg'>
-        <Image
-          src='/assets/avatar-tutor.png'
-          alt='Avatar'
-          width={400}
-          height={400}
-          layout='intrinsic'
-          className='rounded-md'
-        />
+        <Image src='/assets/avatar-tutor.png' alt='Avatar' width={400} height={400} className='rounded-md' />
       </div>
       <div className='flex flex-1 flex-col justify-between border bg-white p-4 px-20 shadow-md'>
         <p className='font-serif text-3xl'>Mr. Albert Einstein</p>

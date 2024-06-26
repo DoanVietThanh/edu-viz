@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const Header = async () => {
   return (
-    <div className='fixed flex w-full items-center justify-between gap-4 border bg-white p-4 font-semibold shadow-lg'>
+    <div className='fixed z-50 flex w-full items-center justify-between gap-4 border bg-white p-4 font-semibold shadow-lg'>
       <div className='flex items-center gap-8'>
         <Link href='/home'>
           <Image
@@ -19,6 +19,7 @@ const Header = async () => {
         </Link>
         <div className='text-[#7A37FF]'>Trang chủ</div>
         <div>Tất cả dịch vụ</div>
+        <Link href='/chat/667ac5146a52284ec61b99e2'>Chat</Link>
       </div>
 
       <SignedIn>

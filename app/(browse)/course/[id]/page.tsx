@@ -35,14 +35,7 @@ const CourseDetailPage = ({ params }: CourseDetailPageProps) => {
                   key={index}
                   className='flex cursor-pointer flex-col items-center justify-center rounded-md border bg-white p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105'
                 >
-                  <Image
-                    src='/assets/avatar-tutor.png'
-                    alt='Avatar'
-                    width={200}
-                    height={200}
-                    layout='intrinsic'
-                    className='rounded-md'
-                  />
+                  <Image src='/assets/avatar-tutor.png' alt='Avatar' width={200} height={200} className='rounded-md' />
                   <p className='m-2 text-xl font-medium'>Tutor Name {index + 1}</p>
                   <p className='text-sm text-muted-foreground'>
                     Exp {index + 30} years - Age {index + 70}

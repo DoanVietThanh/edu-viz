@@ -23,7 +23,7 @@ const RecommendTutors = () => {
                 <Link href={`/tutor/${index + 1}`}>
                   <Card className='cursor-pointer transition-all duration-300 ease-in-out hover:scale-110'>
                     <CardContent className='flex aspect-square flex-col items-center justify-center p-6'>
-                      <Image src='/assets/avatar-tutor.png' alt='Avatar' width={200} height={200} layout='responsive' />
+                      <Image src='/assets/avatar-tutor.png' alt='Avatar' width={200} height={200} />
                       <p className='py-4'>Tutor Name {index + 1}</p>
                     </CardContent>
                   </Card>

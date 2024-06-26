@@ -1,11 +1,11 @@
 import HubItem from './hub-item'
-import { Hubs } from '@/actions/chat/get-hubs'
+import { HubDetail } from '@/actions/chat/get-hubs'
 
 import { Input } from '@/components/ui/input'
 
 type Props = {
   activeHubId: string
-  hubs: Hubs
+  hubs: HubDetail[]
 }
 
 const SidebarChat = ({ activeHubId, hubs }: Props) => {
@@ -21,7 +21,7 @@ const SidebarChat = ({ activeHubId, hubs }: Props) => {
             key={hub.id}
             active={activeHubId === hub.id}
             currentUser={hub.currentUser}
-            hubId={hub.id}
+            id={hub.id}
             lastMessage={hub.lastMessage}
             otherUser={hub.otherUser}
           />

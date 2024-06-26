@@ -1,7 +1,6 @@
-import NotFoundPage from './not-found'
 import { getHubs } from '@/actions/chat/get-hubs'
 import { redirect } from 'next/navigation'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import ContentChat from './_components/content-chat'
 
@@ -9,6 +8,8 @@ import HeaderChat from './_components/header-chat'
 import InfoMessage from './_components/info-message'
 import InputChat from './_components/input-chat'
 import SidebarChat from './_components/sidebar-chat'
+
+import NotFoundPage from '../not-found'
 
 type ChatPageProps = {
   params: {
@@ -22,9 +23,9 @@ const ChatPage = async ({ params }: ChatPageProps) => {
 
   if (hubs.length == 0) return <NotFoundPage />
 
-  const validHubId = hubs.map((hub) => hub.id).includes(hubId)
+  const activeHub = hubs.find((h) => h.id === hubId)
 
-  if (!validHubId) {
+  if (!activeHub) {
     return redirect(`/chat/${hubs[0].id}`)
   }
 
@@ -33,8 +34,10 @@ const ChatPage = async ({ params }: ChatPageProps) => {
       <SidebarChat activeHubId={hubId} hubs={hubs} />
       <div className='flex flex-1'>
         <div className='flex flex-1 flex-col'>
-          <HeaderChat />
-          <ContentChat />
+          <HeaderChat otherUser={activeHub.otherUser} />
+          <Suspense fallback={<div className='text-5xl'>Loading Chat Content...</div>}>
+            <ContentChat activeHubId={hubId} />
+          </Suspense>
           <InputChat />
         </div>
         <InfoMessage />

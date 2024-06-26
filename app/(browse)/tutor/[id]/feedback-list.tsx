@@ -11,7 +11,7 @@ const FeedbackList = () => {
           <div className='flex items-center justify-between gap-4 px-4'>
             <div className='flex items-center gap-4'>
               <Avatar>
-                <AvatarImage src={`/assets/avatar-student.jpg`} alt='@shadcn' />
+                <AvatarImage src='/assets/avatar-student.jpg' alt='@shadcn' />
                 <AvatarFallback>User</AvatarFallback>
               </Avatar>
               <div className='flex flex-col'>
