@@ -1,8 +1,14 @@
+import { Hubs } from '@/actions/chat/get-hubs'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Input } from '@/components/ui/input'
 import { AvatarImage } from '@radix-ui/react-avatar'
 
-const SidebarChat = () => {
+type Props = {
+  activeHubId: string
+  hubs: Hubs
+}
+
+const SidebarChat = ({ activeHubId, hubs }: Props) => {
   return (
     <div className='w-72 border-r-2 border-slate-200 bg-white flex flex-col overflow-y-auto h-screen pb-20'>
       <div className='mb-4 p-2 h-[40px]'>
