@@ -1,10 +1,9 @@
 import NotFoundPage from './not-found'
+import { getHubs } from '@/actions/chat/get-hubs'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
 import ContentChat from './_components/content-chat'
-
-import { getHubs } from '@/actions/chat/get-hubs'
 
 import HeaderChat from './_components/header-chat'
 import InfoMessage from './_components/info-message'

@@ -1,5 +1,4 @@
 import HubItem from './hub-item'
-
 import { Hubs } from '@/actions/chat/get-hubs'
 
 import { Input } from '@/components/ui/input'
@@ -10,8 +9,6 @@ type Props = {
 }
 
 const SidebarChat = ({ activeHubId, hubs }: Props) => {
-  console.log(activeHubId)
-
   return (
     <div className='flex h-screen w-[360px] flex-col overflow-y-auto border-r-2 border-slate-200 bg-white pb-20'>
       <div className='mb-4 h-[40px] p-2'>
@@ -22,6 +19,7 @@ const SidebarChat = ({ activeHubId, hubs }: Props) => {
         {hubs.map((hub) => (
           <HubItem
             key={hub.id}
+            active={activeHubId === hub.id}
             currentUser={hub.currentUser}
             hubId={hub.id}
             lastMessage={hub.lastMessage}

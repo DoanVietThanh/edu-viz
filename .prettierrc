@@ -14,7 +14,6 @@
     "interface",
     "(?=content|api)",
     "provider/",
-    "actions/",
     "context/",
     "mock/",
     "config",
