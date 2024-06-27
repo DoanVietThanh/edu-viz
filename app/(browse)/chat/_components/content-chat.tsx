@@ -12,3 +12,11 @@ export default async function ContentChat({ activeHubId }: Props) {
 
   return <div className='flex-1 bg-background p-4'>Content</div>
 }
+
+export function ContentChatSkeleton() {
+  return (
+    <div className='flex flex-1 items-center justify-center p-4'>
+      <Loader2 className='size-12 animate-spin' />
+    </div>
+  )
+}

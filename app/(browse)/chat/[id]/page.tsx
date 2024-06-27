@@ -3,9 +3,9 @@ import { Loader2 } from 'lucide-react'
 import { redirect } from 'next/navigation'
 import React, { Suspense } from 'react'
 
-import ContentChat from '../_components/content-chat'
+import ContentChat, { ContentChatSkeleton } from '../_components/content-chat'
 
-import HeaderChat from '../_components/header-chat'
+import HeaderChat, { HeaderChatSkeleton } from '../_components/header-chat'
 import InfoMessage from '../_components/info-message'
 import InputChat from '../_components/input-chat'
 import SidebarChat from '../_components/sidebar-chat'
@@ -23,19 +23,14 @@ function ChatPage({ params }: ChatPageProps) {
 
   return (
     <div className='flex size-full flex-col'>
-      <Suspense fallback='Loading header chat....'>
+      <Suspense fallback={<HeaderChatSkeleton />}>
         <HeaderChat hubId={hubId} />
       </Suspense>
 
-      <Suspense
-        fallback={
-          <div className='flex flex-1 items-center justify-center p-4'>
-            <Loader2 className='size-12 animate-spin' />
-          </div>
-        }
-      >
+      <Suspense fallback={<ContentChatSkeleton />}>
         <ContentChat activeHubId={hubId} />
       </Suspense>
+
       <InputChat />
     </div>
   )

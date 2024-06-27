@@ -14,7 +14,12 @@ export const getHub = async (hubId: string) => {
     headers: {
       Authorization: `Bearer ${await getToken()}`
     }
-  }).then((res) => res.json())
+  }).then((res) => {
+    if (res.ok) {
+      return res.json()
+    }
+    return null
+  })
 
   return hub
 }
