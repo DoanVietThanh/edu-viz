@@ -1,7 +1,7 @@
 'use client'
 
 import { Image as ImageIcon, PlusCircle, ThumbsUp } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { Textarea } from '@/components/ui/textarea'
 

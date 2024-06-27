@@ -1,12 +1,10 @@
 import { getHub } from '@/actions/chat/get-hub'
 import { ArrowBigRight, Phone, VideoIcon } from 'lucide-react'
 import Link from 'next/link'
-import { notFound, redirect } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Skeleton } from '@/components/ui/skeleton'
-
-import NotFoundPage from '../not-found'
 
 type Props = {
   hubId: string
