@@ -10,11 +10,11 @@ import { Skeleton } from '@/components/ui/skeleton'
 type Props = HubDetail
 
 function HubItem({ currentUser, id, lastMessage, otherUser }: Props) {
-  let messageContent = lastMessage.senderId === currentUser.id ? 'You' : otherUser.fullName.split(' ').at(-1)
+  let messageContent = lastMessage.senderId === currentUser.id ? 'You:' : ''
 
   switch (lastMessage.type) {
     case 'Text': {
-      messageContent += `: ${lastMessage.content}`
+      messageContent += ` ${lastMessage.content}`
       break
     }
     case 'Image': {

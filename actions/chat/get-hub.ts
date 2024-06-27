@@ -10,16 +10,20 @@ export type HubDetail = { currentUser: User; otherUser: User; lastMessage: Messa
 export const getHub = async (hubId: string) => {
   const { getToken } = auth()
 
-  const hub: HubDetail = await fetch(`${SERVER_URL}/api/chat/hubs/${hubId}`, {
-    headers: {
-      Authorization: `Bearer ${await getToken()}`
-    }
-  }).then((res) => {
-    if (res.ok) {
-      return res.json()
-    }
-    return null
-  })
+  try {
+    const hub: HubDetail = await fetch(`${SERVER_URL}/api/chat/hubs/${hubId}`, {
+      headers: {
+        Authorization: `Bearer ${await getToken()}`
+      }
+    }).then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+      return null
+    })
 
-  return hub
+    return hub
+  } catch (error) {
+    return null
+  }
 }

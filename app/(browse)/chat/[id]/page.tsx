@@ -1,8 +1,10 @@
+import { getHub } from '@/actions/chat/get-hub'
+import { notFound } from 'next/navigation'
 import React, { Suspense } from 'react'
 
 import ContentChat, { ContentChatSkeleton } from '../_components/content-chat'
 
-import HeaderChat, { HeaderChatSkeleton } from '../_components/header-chat'
+import HeaderChat from '../_components/header-chat'
 import InputChat from '../_components/input-chat'
 
 type ChatPageProps = {
@@ -11,20 +13,24 @@ type ChatPageProps = {
   }
 }
 
-function ChatPage({ params }: ChatPageProps) {
-  const hubId = params.id
+async function ChatPage({ params }: ChatPageProps) {
+  const hub = await getHub(params.id)
+
+  if (!hub) {
+    return notFound()
+  }
+
+  const { currentUser, otherUser } = hub
 
   return (
     <div className='flex size-full flex-col'>
-      <Suspense fallback={<HeaderChatSkeleton />}>
-        <HeaderChat hubId={hubId} />
-      </Suspense>
+      <HeaderChat otherUser={otherUser} />
 
       <Suspense fallback={<ContentChatSkeleton />}>
-        <ContentChat activeHubId={hubId} />
+        <ContentChat otherUser={otherUser} activeHubId={hub.id} />
       </Suspense>
 
-      <InputChat />
+      <InputChat otherUser={otherUser!} currentUser={currentUser!} />
     </div>
   )
 }
