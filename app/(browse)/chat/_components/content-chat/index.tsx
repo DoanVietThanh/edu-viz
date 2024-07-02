@@ -3,7 +3,6 @@ import NewMessages from './new-messages'
 import { getMessages } from '@/actions/chat/get-messages'
 import { User } from '@prisma/client'
 import { Loader2 } from 'lucide-react'
-import Image from 'next/image'
 import React from 'react'
 
 type Props = {

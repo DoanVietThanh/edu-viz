@@ -15,9 +15,7 @@ function ChatLayout({ children }: Props) {
   return (
     <SocketProvider clerkId={userId!}>
       <div className='flex h-full overflow-hidden'>
-        <Suspense fallback={<SidebarChatSkeleton />}>
-          <SidebarChat />
-        </Suspense>
+        <SidebarChat />
 
         <div className='flex flex-1'>{children}</div>
       </div>

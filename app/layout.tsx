@@ -1,5 +1,5 @@
 import './globals.css'
-import { ClerkProvider } from '@clerk/nextjs'
+import Providers from './providers'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
@@ -17,16 +17,10 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        elements: {
-          formButtonPrimary: 'bg-primary text-gradient-foreground !shadow-none'
-        }
-      }}
-    >
+    <Providers>
       <html lang='en'>
         <body className={inter.className}>{children}</body>
       </html>
-    </ClerkProvider>
+    </Providers>
   )
 }
