@@ -1,24 +1,24 @@
 'use client'
 
-import MessageGenerator from './message-generator'
-import { Message, User } from '@prisma/client'
+import MessagesGenerator from './messages-generator'
+import { MessageDetail } from '@/actions/chat/get-messages'
+import { User } from '@prisma/client'
 import React, { useEffect, useState } from 'react'
 
 import { useSocket } from '../socket-provider'
 
 type Props = {
-  initLastMessageOwner: string | null
   otherUser: User
 }
 
-function NewMessages({ initLastMessageOwner, otherUser }: Props) {
+function NewMessages({ otherUser }: Props) {
   const { socket } = useSocket()
-  const [messages, setMessages] = useState<Message[]>([])
+  const [messages, setMessages] = useState<MessageDetail[]>([])
 
   useEffect(() => {
     if (!socket) return
 
-    const handleMessage = (msg: Message) => {
+    const handleMessage = (msg: MessageDetail) => {
       setMessages((prev) => [msg, ...prev])
     }
 
@@ -31,7 +31,7 @@ function NewMessages({ initLastMessageOwner, otherUser }: Props) {
 
   return (
     <>
-      <MessageGenerator messages={messages} otherUser={otherUser} />
+      <MessagesGenerator messages={messages} otherUser={otherUser} />
     </>
   )
 }

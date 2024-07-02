@@ -2,7 +2,7 @@
 
 import HubItem, { HubItemSkeleton } from './hub-item'
 import { HubDetail } from '@/actions/chat/get-hub'
-import { Message } from '@prisma/client'
+import { MessageDetail } from '@/actions/chat/get-messages'
 import React, { useEffect, useState } from 'react'
 
 import useHubs from '@/hooks/use-hubs'
@@ -31,7 +31,7 @@ function SidebarChat() {
   useEffect(() => {
     if (!socket) return
 
-    const handleMessage = (msg: Message) => {
+    const handleMessage = (msg: MessageDetail) => {
       const hub = hubs?.find((h) => h.id === msg.hubId)
       if (!hub) return
 

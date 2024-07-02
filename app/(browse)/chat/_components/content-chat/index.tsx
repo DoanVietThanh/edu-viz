@@ -1,4 +1,4 @@
-import MessageGenerator from './message-generator'
+import MessagesGenerator from './messages-generator'
 import NewMessages from './new-messages'
 import { getMessages } from '@/actions/chat/get-messages'
 import { User } from '@prisma/client'
@@ -15,8 +15,8 @@ export default async function ContentChat({ activeHubId, otherUser }: Props) {
 
   return (
     <div className='flex w-full flex-1 flex-col-reverse overflow-y-auto bg-background p-4 px-3 py-2'>
-      <NewMessages otherUser={otherUser} initLastMessageOwner={messages[messages.length - 1]?.senderId || null} />
-      <MessageGenerator messages={messages} otherUser={otherUser} />
+      <NewMessages otherUser={otherUser} />
+      <MessagesGenerator messages={messages} otherUser={otherUser} />
     </div>
   )
 }

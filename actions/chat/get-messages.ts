@@ -1,7 +1,7 @@
 'use server'
 
 import { auth } from '@clerk/nextjs/server'
-import { Message, Reservation } from '@prisma/client'
+import { Message, Package, Reservation, Subject } from '@prisma/client'
 
 import { SERVER_URL } from '@/constants/env-config'
 
@@ -11,7 +11,15 @@ type GetJobParams = {
   pageNumber?: number
 }
 
-export type MessageDetail = Message & { reservation: Reservation | undefined }
+export type MessageDetail = Message & {
+  reservation:
+    | (Reservation & {
+        package: Package & {
+          subject: Subject
+        }
+      })
+    | undefined
+}
 
 export const getMessages = async ({ hubId, pageNumber = 1, pageSize = 30 }: GetJobParams) => {
   const { getToken } = auth()
