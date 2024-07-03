@@ -34,3 +34,25 @@ export async function eduVizFetch<T>(input: string | URL | Request, init?: Reque
     throw error
   }
 }
+
+export function formatMessageTime(timestamp: number): string {
+  const now = new Date()
+  const date = new Date(timestamp)
+
+  const isToday = now.toDateString() === date.toDateString()
+
+  const options: Intl.DateTimeFormatOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  }
+
+  if (isToday) {
+    return date.toLocaleTimeString('en-US', options)
+  } else {
+    options.day = '2-digit'
+    options.month = 'long'
+    options.year = 'numeric'
+    return date.toLocaleDateString('en-US', options)
+  }
+}

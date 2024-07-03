@@ -3,7 +3,7 @@ import CompleteMessage from './complete-message'
 import OrderMessage from './order-message'
 import RejectMessage from './reject-message'
 import { MessageDetail } from '@/actions/chat/get-messages'
-import { cn } from '@/lib/utils'
+import { cn, formatMessageTime } from '@/lib/utils'
 import { User } from '@prisma/client'
 import Image from 'next/image'
 import React from 'react'
@@ -11,41 +11,64 @@ import React from 'react'
 type Props = {
   otherUser: User
   messages: MessageDetail[]
+  timeLastBeforeOuterMessage?: number
 }
 
-function MessagesGenerator({ otherUser, messages }: Props) {
+function MessagesGenerator({ otherUser, messages, timeLastBeforeOuterMessage }: Props) {
   return (
     <>
       {messages.map((message, i) => {
+        const timeCurrentMessage = new Date(message.createdAt).getTime()
+        let isDisplayTime = true
+
+        if (i === messages.length - 1) {
+          if (timeLastBeforeOuterMessage) {
+            isDisplayTime &&= timeCurrentMessage - timeLastBeforeOuterMessage > 15 * 60 * 1000
+          }
+        } else {
+          const timeLastBeforeMessage = new Date(messages[i + 1].createdAt).getTime()
+          isDisplayTime &&= timeCurrentMessage - timeLastBeforeMessage > 15 * 60 * 1000
+        }
+
         if (message.senderId !== otherUser.id)
           return (
-            <div key={message.id} className='my-1 w-fit max-w-[50%] self-end'>
-              <MessageContent otherUser={otherUser} message={message} />
-            </div>
+            <>
+              <div key={message.id} className='my-1 w-fit max-w-[50%] self-end'>
+                <MessageContent otherUser={otherUser} message={message} />
+              </div>
+              {isDisplayTime && (
+                <div className='my-4 w-full text-center text-xs font-bold'>{formatMessageTime(timeCurrentMessage)}</div>
+              )}
+            </>
           )
 
         const nextMessage = i < messages.length - 1 ? messages[i + 1] : null
         const isLastMessageInSequence = i == messages.length - 1 || otherUser.id !== nextMessage?.senderId
 
         return (
-          <div key={message.id} className='my-1 flex gap-2'>
-            {isLastMessageInSequence ? (
-              <div>
-                <Image
-                  alt='other-user-avatar'
-                  src={otherUser.avatar}
-                  className='mt-1 rounded-full object-cover'
-                  height={36}
-                  width={36}
-                />
+          <>
+            <div key={message.id} className='my-1 flex gap-2'>
+              {isLastMessageInSequence ? (
+                <div>
+                  <Image
+                    alt='other-user-avatar'
+                    src={otherUser.avatar}
+                    className='mt-1 rounded-full object-cover'
+                    height={36}
+                    width={36}
+                  />
+                </div>
+              ) : (
+                <div className='size-9'></div>
+              )}
+              <div className='w-fit max-w-[50%]'>
+                <MessageContent otherUser={otherUser} message={message} />
               </div>
-            ) : (
-              <div className='size-9'></div>
-            )}
-            <div className='w-fit max-w-[50%]'>
-              <MessageContent otherUser={otherUser} message={message} />
             </div>
-          </div>
+            {isDisplayTime && (
+              <div className='my-4 w-full text-center text-xs font-bold'>{formatMessageTime(timeCurrentMessage)}</div>
+            )}
+          </>
         )
       })}
     </>

@@ -21,7 +21,7 @@ const HeaderChat = async ({ otherUser }: Props) => {
           <Link href='/' className='font-semibold leading-none'>
             {otherUser.fullName}
           </Link>
-          {!otherUser.tutor?.isAvailable && (
+          {otherUser.tutor?.isAvailable && (
             <div className='line-clamp-1 flex items-center gap-2 text-ellipsis text-sm leading-none text-foreground'>
               <div className='size-2 rounded-full bg-green-500'></div> Available
             </div>

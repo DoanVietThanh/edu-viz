@@ -15,7 +15,10 @@ export default async function ContentChat({ activeHubId, otherUser }: Props) {
 
   return (
     <div className='flex w-full flex-1 flex-col-reverse overflow-y-auto bg-background p-4 px-3 py-2'>
-      <NewMessages otherUser={otherUser} />
+      <NewMessages
+        timeLastBeforeOuterMessage={messages[0] && new Date(messages[0].createdAt).getTime()}
+        otherUser={otherUser}
+      />
       <MessagesGenerator messages={messages} otherUser={otherUser} />
     </div>
   )

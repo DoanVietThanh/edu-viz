@@ -9,9 +9,10 @@ import { useSocket } from '../socket-provider'
 
 type Props = {
   otherUser: User
+  timeLastBeforeOuterMessage: number
 }
 
-function NewMessages({ otherUser }: Props) {
+function NewMessages({ otherUser, timeLastBeforeOuterMessage }: Props) {
   const { socket } = useSocket()
   const [messages, setMessages] = useState<MessageDetail[]>([])
 
@@ -32,7 +33,11 @@ function NewMessages({ otherUser }: Props) {
 
   return (
     <>
-      <MessagesGenerator messages={messages} otherUser={otherUser} />
+      <MessagesGenerator
+        timeLastBeforeOuterMessage={timeLastBeforeOuterMessage}
+        messages={messages}
+        otherUser={otherUser}
+      />
     </>
   )
 }
