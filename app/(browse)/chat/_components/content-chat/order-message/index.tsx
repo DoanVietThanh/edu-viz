@@ -1,9 +1,8 @@
+import Actions from './actions'
 import { MessageDetail } from '@/actions/chat/get-messages'
 import { User } from '@prisma/client'
 import Image from 'next/image'
 import React from 'react'
-
-import { Button } from '@/components/ui/button'
 
 type Props = { message: MessageDetail; otherUser: User }
 
@@ -27,12 +26,7 @@ function OrderMessage({ message, otherUser }: Props) {
         Waiting for {isTutor ? 'you' : 'tutor'} to accept order. Order will be automatically canceled if{' '}
         {isTutor ? 'you do' : 'tutor does'} not respond within 1 hour.
       </p>
-      {isTutor && (
-        <div className='flex items-center justify-end gap-x-4'>
-          <Button variant='outline'>Reject</Button>
-          <Button>Approve</Button>
-        </div>
-      )}
+      {isTutor && reservation.status === 'Pending' && <Actions reservationId={reservation.id} />}
     </div>
   )
 }

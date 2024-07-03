@@ -77,5 +77,16 @@ function MessageContent({ message, otherUser }: { message: MessageDetail; otherU
     return <OrderMessage message={message} otherUser={otherUser} />
   }
 
+  return (
+    <div
+      className={cn(
+        'px-3 py-2 rounded-lg',
+        otherUser.id !== message.senderId ? 'text-primary-foreground bg-primary' : 'bg-muted'
+      )}
+    >
+      {message.type}
+    </div>
+  )
+
   return null
 }

@@ -19,6 +19,7 @@ function NewMessages({ otherUser }: Props) {
     if (!socket) return
 
     const handleMessage = (msg: MessageDetail) => {
+      if (!['Image', 'Video', 'Text'].includes(msg.type) && msg.receiverId === otherUser.id) return
       setMessages((prev) => [msg, ...prev])
     }
 
@@ -27,7 +28,7 @@ function NewMessages({ otherUser }: Props) {
     return () => {
       socket.off('chatMessage', handleMessage)
     }
-  }, [socket])
+  }, [socket, otherUser])
 
   return (
     <>
