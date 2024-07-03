@@ -6,11 +6,11 @@ import { revalidatePath } from 'next/cache'
 
 import { SERVER_URL } from '@/constants/env-config'
 
-export const approveOrder = async (reservationId: string) => {
+export const rejectOrder = async (reservationId: string) => {
   const { getToken } = auth()
 
   try {
-    const data = await eduVizFetch<{ hubId: string }>(`${SERVER_URL}/api/reservations/${reservationId}/approve`, {
+    const data = await eduVizFetch<{ hubId: string }>(`${SERVER_URL}/api/reservations/${reservationId}/reject`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${await getToken()}`

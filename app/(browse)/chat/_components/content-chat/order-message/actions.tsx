@@ -1,7 +1,7 @@
 'use client'
 
 import { approveOrder } from '@/actions/reservation/approve-order'
-import { isBaseError } from '@/lib/utils'
+import { rejectOrder } from '@/actions/reservation/reject-order'
 import React, { useTransition } from 'react'
 import { toast } from 'sonner'
 
@@ -27,12 +27,26 @@ function Actions({ reservationId }: Props) {
     })
   }
 
+  const handleRejectOrder = () => {
+    if (isApproving || isRejecting) return
+
+    startRejectOrder(() => {
+      rejectOrder(reservationId)
+        .then(() => {
+          toast.success('Reject order successfully')
+        })
+        .catch((error: Error) => {
+          toast.error(error.message)
+        })
+    })
+  }
+
   return (
     <div className='flex items-center justify-end gap-x-4'>
-      <Button disabled={isApproving || isRejecting} variant='outline'>
+      <Button onClick={handleRejectOrder} disabled={isApproving || isRejecting} variant='outline'>
         Reject
       </Button>
-      <Button disabled={isApproving || isRejecting} onClick={handleApproveOrder}>
+      <Button onClick={handleApproveOrder} disabled={isApproving || isRejecting}>
         Approve
       </Button>
     </div>

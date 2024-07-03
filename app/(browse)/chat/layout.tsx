@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs/server'
-import React, { Suspense } from 'react'
+import React from 'react'
 
-import SidebarChat, { SidebarChatSkeleton } from './_components/sidebar-chat'
+import SidebarChat from './_components/sidebar-chat'
 import SocketProvider from './_components/socket-provider'
 
 type Props = {

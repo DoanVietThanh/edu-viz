@@ -1,4 +1,7 @@
+import ApproveMessage from './approve-message'
+import CompleteMessage from './complete-message'
 import OrderMessage from './order-message'
+import RejectMessage from './reject-message'
 import { MessageDetail } from '@/actions/chat/get-messages'
 import { cn } from '@/lib/utils'
 import { User } from '@prisma/client'
@@ -77,16 +80,17 @@ function MessageContent({ message, otherUser }: { message: MessageDetail; otherU
     return <OrderMessage message={message} otherUser={otherUser} />
   }
 
-  return (
-    <div
-      className={cn(
-        'px-3 py-2 rounded-lg',
-        otherUser.id !== message.senderId ? 'text-primary-foreground bg-primary' : 'bg-muted'
-      )}
-    >
-      {message.type}
-    </div>
-  )
+  if (message.type === 'ReservationReject') {
+    return <RejectMessage message={message} otherUser={otherUser} />
+  }
+
+  if (message.type === 'ReservationApprove') {
+    return <ApproveMessage message={message} otherUser={otherUser} />
+  }
+
+  if (message.type === 'ReservationComplete') {
+    return <CompleteMessage message={message} otherUser={otherUser} />
+  }
 
   return null
 }

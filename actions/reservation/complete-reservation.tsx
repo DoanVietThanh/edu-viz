@@ -1,20 +1,23 @@
 'use server'
 
 import { eduVizFetch, isBaseError } from '@/lib/utils'
+import { TCompleteOrderSchema } from '@/lib/validation/reservation.revalidation'
 import { auth } from '@clerk/nextjs/server'
 import { revalidatePath } from 'next/cache'
 
 import { SERVER_URL } from '@/constants/env-config'
 
-export const approveOrder = async (reservationId: string) => {
+export const completeOrder = async ({ reservationId, value, content }: TCompleteOrderSchema) => {
   const { getToken } = auth()
 
   try {
-    const data = await eduVizFetch<{ hubId: string }>(`${SERVER_URL}/api/reservations/${reservationId}/approve`, {
+    const data = await eduVizFetch<{ hubId: string }>(`${SERVER_URL}/api/reservations/${reservationId}/complete`, {
       method: 'PATCH',
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${await getToken()}`
-      }
+      },
+      body: JSON.stringify({ value, content })
     })
 
     const hubId = data?.hubId
