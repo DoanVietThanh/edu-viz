@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import MessagesGenerator from './messages-generator'
-import { MessageDetail } from '@/actions/chat/get-messages'
-import { User } from '@prisma/client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
+import { type MessageDetail } from "@/actions/chat/get-messages"
+import { type User } from "@prisma/client"
 
-import { useSocket } from '../socket-provider'
+import { useSocket } from "../socket-provider"
+import MessagesGenerator from "./messages-generator"
 
 type Props = {
   otherUser: User
@@ -20,14 +20,18 @@ function NewMessages({ otherUser, timeLastBeforeOuterMessage }: Props) {
     if (!socket) return
 
     const handleMessage = (msg: MessageDetail) => {
-      if (!['Image', 'Video', 'Text'].includes(msg.type) && msg.receiverId === otherUser.id) return
+      if (
+        !["Image", "Video", "Text"].includes(msg.type) &&
+        msg.receiverId === otherUser.id
+      )
+        return
       setMessages((prev) => [msg, ...prev])
     }
 
-    socket.on('chatMessage', handleMessage)
+    socket.on("chatMessage", handleMessage)
 
     return () => {
-      socket.off('chatMessage', handleMessage)
+      socket.off("chatMessage", handleMessage)
     }
   }, [socket, otherUser])
 

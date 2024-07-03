@@ -1,23 +1,30 @@
-'use server'
+"use server"
 
-import { auth } from '@clerk/nextjs/server'
-import { Message, User } from '@prisma/client'
+import { SERVER_URL } from "@/constants/env-config"
+import { auth } from "@clerk/nextjs/server"
+import { type Message, type User } from "@prisma/client"
 
-import { SERVER_URL } from '@/constants/env-config'
-
-export type HubDetail = { currentUser: User; otherUser: User; lastMessage: Message; id: string }
+export type HubDetail = {
+  currentUser: User
+  otherUser: User
+  lastMessage: Message
+  id: string
+}
 
 export const getHub = async (hubId: string) => {
   const { getToken } = auth()
 
   try {
-    const hub: HubDetail = await fetch(`${SERVER_URL}/api/chat/hubs/${hubId}`, {
-      headers: {
-        Authorization: `Bearer ${await getToken()}`
+    const hub: HubDetail | null = await fetch(
+      `${SERVER_URL}/api/chat/hubs/${hubId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${await getToken()}`,
+        },
       }
-    }).then((res) => {
+    ).then((res) => {
       if (res.ok) {
-        return res.json()
+        return res.json() as Promise<HubDetail>
       }
       return null
     })

@@ -1,21 +1,24 @@
-'use client'
+"use client"
 
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import { Socket, io } from 'socket.io-client'
+import React, { createContext, useContext, useEffect, useState } from "react"
+import { SERVER_URL } from "@/constants/env-config"
+import { io, type Socket } from "socket.io-client"
 
-import { SERVER_URL } from '@/constants/env-config'
-
-export type TSendMessage = { receiverId: string; senderId: string; type: 'Text' | 'Image' | 'Video' } & (
+export type TSendMessage = {
+  receiverId: string
+  senderId: string
+  type: "Text" | "Image" | "Video"
+} & (
   | {
-      type: 'Text'
+      type: "Text"
       content: string
     }
   | {
-      type: 'Image'
+      type: "Image"
       image: string
     }
   | {
-      type: 'Video'
+      type: "Video"
       video: string
     }
 )
@@ -51,7 +54,7 @@ const SocketProvider = ({ children, clerkId }: SocketProviderProps) => {
   useEffect(() => {
     const joinRoom = () => {
       if (socket) {
-        socket.emit('joinRoom', clerkId)
+        socket.emit("joinRoom", clerkId)
       }
     }
 
@@ -64,18 +67,22 @@ const SocketProvider = ({ children, clerkId }: SocketProviderProps) => {
   useEffect(() => {
     const leaveRoom = () => {
       if (socket) {
-        socket.emit('leaveRoom', clerkId)
+        socket.emit("leaveRoom", clerkId)
       }
     }
 
-    window.addEventListener('beforeunload', leaveRoom)
+    window.addEventListener("beforeunload", leaveRoom)
 
     return () => {
-      window.removeEventListener('beforeunload', leaveRoom)
+      window.removeEventListener("beforeunload", leaveRoom)
     }
   }, [socket, clerkId])
 
-  return <SocketContext.Provider value={{ socket }}>{children}</SocketContext.Provider>
+  return (
+    <SocketContext.Provider value={{ socket }}>
+      {children}
+    </SocketContext.Provider>
+  )
 }
 
 export default SocketProvider
@@ -83,7 +90,7 @@ export default SocketProvider
 export const useSocket = () => {
   const context = useContext(SocketContext)
   if (!context) {
-    throw new Error('useSocket must be used within a SocketProvider')
+    throw new Error("useSocket must be used within a SocketProvider")
   }
   return context
 }

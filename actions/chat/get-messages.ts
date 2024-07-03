@@ -1,9 +1,13 @@
-'use server'
+"use server"
 
-import { auth } from '@clerk/nextjs/server'
-import { Message, Package, Reservation, Subject } from '@prisma/client'
-
-import { SERVER_URL } from '@/constants/env-config'
+import { SERVER_URL } from "@/constants/env-config"
+import { auth } from "@clerk/nextjs/server"
+import {
+  type Message,
+  type Package,
+  type Reservation,
+  type Subject,
+} from "@prisma/client"
 
 type GetJobParams = {
   hubId: string
@@ -21,7 +25,11 @@ export type MessageDetail = Message & {
     | undefined
 }
 
-export const getMessages = async ({ hubId, pageNumber = 1, pageSize = 30 }: GetJobParams) => {
+export const getMessages = async ({
+  hubId,
+  pageNumber = 1,
+  pageSize = 30,
+}: GetJobParams) => {
   const { getToken } = auth()
 
   try {
@@ -29,12 +37,12 @@ export const getMessages = async ({ hubId, pageNumber = 1, pageSize = 30 }: GetJ
       `${SERVER_URL}/api/chat/hubs/${hubId}/messages?pageSize=${pageSize}&pageNumber=${pageNumber}`,
       {
         headers: {
-          Authorization: `Bearer ${await getToken()}`
-        }
+          Authorization: `Bearer ${await getToken()}`,
+        },
       }
     ).then((res) => {
       if (res.ok) {
-        return res.json()
+        return res.json() as Promise<MessageDetail[]>
       }
       return []
     })

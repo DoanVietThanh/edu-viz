@@ -1,13 +1,16 @@
-'use client'
+"use client"
 
-import { completeOrder } from '@/actions/reservation/complete-reservation'
-import { TCompleteOrderSchema, completeOrderSchema } from '@/lib/validation/reservation.revalidation'
-import { zodResolver } from '@hookform/resolvers/zod'
-import React, { useState, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
+import React, { useState, useTransition } from "react"
+import { completeOrder } from "@/actions/reservation/complete-reservation"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 
-import { Button } from '@/components/ui/button'
+import {
+  completeOrderSchema,
+  type TCompleteOrderSchema,
+} from "@/lib/validation/reservation.revalidation"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogClose,
@@ -15,11 +18,18 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 
 type Props = { reservationId: string }
 
@@ -30,10 +40,10 @@ function Actions({ reservationId }: Props) {
   const form = useForm<TCompleteOrderSchema>({
     resolver: zodResolver(completeOrderSchema),
     defaultValues: {
-      content: '',
+      content: "",
       value: 5,
-      reservationId
-    }
+      reservationId,
+    },
   })
 
   const handleOpenChange = (value: boolean) => {
@@ -47,7 +57,7 @@ function Actions({ reservationId }: Props) {
     startCompleteOrder(() => {
       completeOrder(values)
         .then(() => {
-          toast.success('Complete order successfully')
+          toast.success("Complete order successfully")
         })
         .catch((error: Error) => {
           toast.error(error.message)
@@ -65,21 +75,24 @@ function Actions({ reservationId }: Props) {
           <DialogTitle>Feedback your experience</DialogTitle>
           <DialogDescription asChild>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className='mt-4 space-y-4'>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="mt-4 space-y-4"
+              >
                 <FormField
                   control={form.control}
-                  name='value'
+                  name="value"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='text-base'>Star</FormLabel>
+                      <FormLabel className="text-base">Star</FormLabel>
                       <FormControl>
-                        <div className='flex flex-col gap-y-4'>
+                        <div className="flex flex-col gap-y-4">
                           <Input
                             {...field}
                             value={field.value}
-                            type='number'
+                            type="number"
                             onChange={(e) => field.onChange(e.target.value)}
-                            placeholder='Stars...'
+                            placeholder="Stars..."
                             disabled={isCompleting}
                           />
                         </div>
@@ -90,12 +103,12 @@ function Actions({ reservationId }: Props) {
                 />
                 <FormField
                   control={form.control}
-                  name='content'
+                  name="content"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='text-base'>Feedback</FormLabel>
+                      <FormLabel className="text-base">Feedback</FormLabel>
                       <FormControl>
-                        <div className='flex flex-col gap-y-4'>
+                        <div className="flex flex-col gap-y-4">
                           <Textarea
                             {...field}
                             value={field.value}
@@ -110,14 +123,22 @@ function Actions({ reservationId }: Props) {
                   )}
                 />
 
-                <div className='flex justify-end gap-x-4'>
+                <div className="flex justify-end gap-x-4">
                   <DialogClose asChild>
-                    <Button disabled={isCompleting} variant='secondary' className='float-right mt-4'>
+                    <Button
+                      disabled={isCompleting}
+                      variant="secondary"
+                      className="float-right mt-4"
+                    >
                       Cancel
                     </Button>
                   </DialogClose>
 
-                  <Button disabled={isCompleting} type='submit' className='float-right mt-4'>
+                  <Button
+                    disabled={isCompleting}
+                    type="submit"
+                    className="float-right mt-4"
+                  >
                     Submit
                   </Button>
                 </div>

@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import { ClerkProvider } from '@clerk/nextjs'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import React from 'react'
+import React from "react"
+import { ClerkProvider } from "@clerk/nextjs"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 const queryClient = new QueryClient()
 
@@ -15,8 +15,8 @@ function Providers({ children }: Props) {
     <ClerkProvider
       appearance={{
         elements: {
-          formButtonPrimary: 'bg-primary text-gradient-foreground !shadow-none'
-        }
+          formButtonPrimary: "bg-primary text-gradient-foreground !shadow-none",
+        },
       }}
     >
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

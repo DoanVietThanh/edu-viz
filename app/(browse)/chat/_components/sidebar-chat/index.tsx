@@ -1,15 +1,14 @@
-'use client'
+"use client"
 
-import HubItem, { HubItemSkeleton } from './hub-item'
-import { HubDetail } from '@/actions/chat/get-hub'
-import { MessageDetail } from '@/actions/chat/get-messages'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
+import { type HubDetail } from "@/actions/chat/get-hub"
+import { type MessageDetail } from "@/actions/chat/get-messages"
 
-import useHubs from '@/hooks/use-hubs'
+import useHubs from "@/hooks/use-hubs"
+import { Input } from "@/components/ui/input"
 
-import { Input } from '@/components/ui/input'
-
-import { useSocket } from '../socket-provider'
+import { useSocket } from "../socket-provider"
+import HubItem, { HubItemSkeleton } from "./hub-item"
 
 function SidebarChat() {
   const { socket } = useSocket()
@@ -42,24 +41,28 @@ function SidebarChat() {
       })
     }
 
-    socket.on('chatMessage', handleMessage)
+    socket.on("chatMessage", handleMessage)
 
     return () => {
-      socket.off('chatMessage', handleMessage)
+      socket.off("chatMessage", handleMessage)
     }
   }, [socket, hubs])
 
   if (isLoading) return <SidebarChatSkeleton />
 
   return (
-    <div className='flex h-screen w-[360px] flex-col overflow-y-auto border-r-2 border-slate-200 bg-white pb-20'>
-      <div className='mb-4 h-[40px] p-2'>
-        <Input placeholder='Search user' />
+    <div className="flex h-screen w-[360px] flex-col overflow-y-auto border-r-2 border-slate-200 bg-white pb-20">
+      <div className="mb-4 h-[40px] p-2">
+        <Input placeholder="Search user" />
       </div>
 
-      <div className='flex flex-1 flex-col '>
+      <div className="flex flex-1 flex-col">
         {Object.values(mapHubs)
-          .sort((a, b) => new Date(b.lastMessage.createdAt).getTime() - new Date(a.lastMessage.createdAt).getTime())
+          .sort(
+            (a, b) =>
+              new Date(b.lastMessage.createdAt).getTime() -
+              new Date(a.lastMessage.createdAt).getTime()
+          )
           .map((hub) => (
             <HubItem
               key={hub.id}
@@ -78,12 +81,12 @@ export default SidebarChat
 
 export function SidebarChatSkeleton() {
   return (
-    <div className='flex h-screen w-[360px] flex-col overflow-y-auto border-r-2 border-slate-200 bg-white pb-20'>
-      <div className='mb-4 h-[40px] p-2'>
-        <Input placeholder='Search user' />
+    <div className="flex h-screen w-[360px] flex-col overflow-y-auto border-r-2 border-slate-200 bg-white pb-20">
+      <div className="mb-4 h-[40px] p-2">
+        <Input placeholder="Search user" />
       </div>
 
-      <div className='flex flex-1 flex-col '>
+      <div className="flex flex-1 flex-col">
         <HubItemSkeleton />
         <HubItemSkeleton />
         <HubItemSkeleton />

@@ -1,9 +1,9 @@
-'use server'
+"use server"
 
-import { HubDetail } from './get-hub'
-import { auth } from '@clerk/nextjs/server'
+import { SERVER_URL } from "@/constants/env-config"
+import { auth } from "@clerk/nextjs/server"
 
-import { SERVER_URL } from '@/constants/env-config'
+import { type HubDetail } from "./get-hub"
 
 export const getHubs = async () => {
   const { getToken } = auth()
@@ -11,11 +11,11 @@ export const getHubs = async () => {
   try {
     const hubs: HubDetail[] = await fetch(`${SERVER_URL}/api/chat/hubs`, {
       headers: {
-        Authorization: `Bearer ${await getToken()}`
-      }
+        Authorization: `Bearer ${await getToken()}`,
+      },
     }).then((res) => {
       if (res.ok) {
-        return res.json()
+        return res.json() as Promise<HubDetail[]>
       }
       return []
     })
