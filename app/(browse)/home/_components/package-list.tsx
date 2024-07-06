@@ -1,0 +1,64 @@
+import { getPackagesBySubjectName } from '@/actions/package/get-packages'
+import { PackageType } from '@/types/package'
+import { Subject } from '@/types/subject'
+import { User } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+
+import { Button } from '@/components/ui/button'
+
+type PackageListProps = {
+  subjectName: string
+  subject: Subject
+}
+
+const PackageList = async ({ subjectName, subject }: PackageListProps) => {
+  const packages = await getPackagesBySubjectName(subjectName)
+  function isValidUrl(url: string) {
+    try {
+      new URL(url)
+      return true
+    } catch (error) {
+      return false
+    }
+  }
+  return (
+    <div className='my-8' key={subject.id}>
+      <div className='flex items-center justify-between'>
+        <p className='text-2xl font-semibold'>
+          {subject.name} {`(${packages.length})`}
+        </p>
+        {packages?.length > 0 && (
+          <Button variant='link' asChild>
+            <Link href={`/course/${subject.id}`}>Xem thêm</Link>
+          </Button>
+        )}
+      </div>
+      <div className='my-4 grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        {packages?.map((packageItem: PackageType) => (
+          <Link href={`/tutor/${packageItem.id}`} key={packageItem.id}>
+            <div className='flex gap-8 p-4 border rounded-md shadow-md cursor-pointer hover:font-semibold hover:scale-105 transition-all ease-in-out duration-300'>
+              <div className='flex items-center justify-between overflow-hidden'>
+                <Image
+                  src={isValidUrl(packageItem.tutor.avatar) ? packageItem.tutor.avatar : '/assets/avatar-tutor-2.png'}
+                  alt='Avatar'
+                  width={100}
+                  height={100}
+                  layout='intrinsic'
+                  className='rounded-md'
+                />
+              </div>
+              <div className='flex flex-col justify-start gap-4 text-sm'>
+                <p className='flex items-center gap-4'>
+                  <User /> {packageItem.tutor.fullName}
+                </p>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default PackageList
