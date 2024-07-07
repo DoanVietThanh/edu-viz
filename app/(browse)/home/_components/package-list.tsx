@@ -36,7 +36,7 @@ const PackageList = async ({ subjectName, subject }: PackageListProps) => {
       </div>
       <div className='my-4 grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
         {packages?.map((packageItem: PackageType) => (
-          <Link href={`/tutor/${packageItem.id}`} key={packageItem.id}>
+          <Link href={`/tutor/${packageItem.tutorId}?subject=${packageItem.subject.name}`} key={packageItem.tutorId}>
             <div className='flex gap-8 p-4 border rounded-md shadow-md cursor-pointer hover:font-semibold hover:scale-105 transition-all ease-in-out duration-300'>
               <div className='flex items-center justify-between overflow-hidden'>
                 <Image
