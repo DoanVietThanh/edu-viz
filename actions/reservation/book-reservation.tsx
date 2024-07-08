@@ -1,29 +1,32 @@
 'use server'
 
-import { isBaseError } from '@/lib/utils'
 import { auth } from '@clerk/nextjs/server'
 
 import { SERVER_URL } from '@/constants/env-config'
 
 export const bookReservation = async (packageId: string, duration: number) => {
-  const { getToken } = auth()
+  console.log('Testttt: ', Number(duration))
   try {
-    const packages = await fetch(`${SERVER_URL}/api/reservations`, {
+    const { getToken } = auth()
+    const token = await getToken()
+
+    const response = await fetch(`${SERVER_URL}/api/reservations`, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${await getToken()}`
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ packageId, duration })
-    }).then((res) => res.json())
-    return packages
-  } catch (error) {
-    let messageError = ''
-    if (!isBaseError(error) || error.statusCode === 500) {
-      messageError = 'Something went wrong'
-    } else {
-      messageError = error.message
+      body: JSON.stringify({ packageId, duration: Number(duration) })
+    })
+    const packages = await response.json()
+
+    if (!response.ok) {
+      throw new Error(packages.message || 'Something went wrong')
     }
 
+    return packages
+  } catch (error: any) {
+    let messageError = error.message || 'Something went wrong'
     throw new Error(messageError)
   }
 }

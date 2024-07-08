@@ -32,10 +32,10 @@ const TutorBooking = ({ tutorInfo, selectedPackage }: TutorBookingProps) => {
 
   const handleSubmit = () => {
     if (isBooking) return
-    startBooking(() => {
-      bookReservation(selectedPackage.id, duration)
-        .then(() => {
-          toast.success('Đặt đơn hàng thành công')
+    startBooking(async () => {
+      await bookReservation(selectedPackage.id, duration)
+        .then((res) => {
+          toast.success(res.message || 'Đặt đơn hàng thành công')
           setOpenBooking(false)
         })
         .catch((error: Error) => {
