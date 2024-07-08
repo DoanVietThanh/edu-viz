@@ -1,5 +1,6 @@
 'use client'
 
+import TutorBooking from './tutor-booking'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -12,10 +13,10 @@ type TutorInfoProps = {
 }
 const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
   const packagesTutor = tutorInfo.packages
+  console.log('🚀 ~ TutorInfo ~ packagesTutor:', packagesTutor)
   const [selectedPackage, setSelectedPackage] = useState(
     () => packagesTutor.filter((item: any) => item.subject.name === subjectName)[0]
   )
-  console.log('🚀 ~ TutorInfo ~ selectedPackage:', selectedPackage)
 
   return (
     <div className='flex flex-col gap-4'>
@@ -87,7 +88,10 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
                         />
                         <div className='mx-2'>
                           <p className=''>{packageItem.subject.name}</p>
-                          <p className='text-yellow-400'>$10 / hour</p>
+                          <div className='flex gap-2 items-center'>
+                            <Image src='/icons/coin.png' width={16} height={16} className='object-cover' alt='coin' />
+                            {packageItem.pricePerHour} / hour
+                          </div>
                         </div>
                       </div>
                     </CarouselItem>
@@ -101,13 +105,16 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
               <Image
                 src={selectedPackage.image || `https://images.viblo.asia/1d949589-afdd-4a1e-b77f-c53fdaf8af13.png`}
                 alt='Avatar'
-                width={100}
+                width={120}
                 height={100}
                 className='rounded-md'
               />
               <div className='mx-2 font-semibold'>
                 <p className='text-3xl font-bold'>{selectedPackage.subject.name}</p>
-                <p className='text-yellow-700'>${selectedPackage.pricePerHour} / hour</p>
+                <div className='flex gap-2 items-center text-coin'>
+                  <Image src='/icons/coin.png' width={16} height={16} className='object-cover' alt='coin' />
+                  {selectedPackage.pricePerHour} / hour
+                </div>
                 <div className='flex items-center gap-4'>
                   <p className=''>⭐{selectedPackage.averageFeedbacksValue} </p>
                   <p className='p-2 bg-green-400 rounded-xl text-white'>{selectedPackage.status}</p>
@@ -116,14 +123,7 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
               </div>
             </div>
           </div>
-          <div className='flex gap-4'>
-            <Button variant='default' className='flex-1'>
-              Đặt đơn
-            </Button>
-            <Button variant='secondary' className='flex-1'>
-              Chat
-            </Button>
-          </div>
+          <TutorBooking tutorInfo={tutorInfo} selectedPackage={selectedPackage} />
         </div>
       </section>
     </div>
