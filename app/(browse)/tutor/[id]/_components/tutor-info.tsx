@@ -1,6 +1,8 @@
 'use client'
 
+import FeedbackList from './feedback-list'
 import TutorBooking from './tutor-booking'
+import TutorComment from './tutor-comment'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -13,7 +15,6 @@ type TutorInfoProps = {
 }
 const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
   const packagesTutor = tutorInfo.packages
-  console.log('🚀 ~ TutorInfo ~ packagesTutor:', packagesTutor)
   const [selectedPackage, setSelectedPackage] = useState(
     () => packagesTutor.filter((item: any) => item.subject.name === subjectName)[0]
   )
@@ -126,6 +127,9 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
           <TutorBooking tutorInfo={tutorInfo} selectedPackage={selectedPackage} />
         </div>
       </section>
+
+      <TutorComment />
+      <FeedbackList selectedPackage={selectedPackage} />
     </div>
   )
 }
