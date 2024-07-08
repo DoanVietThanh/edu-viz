@@ -29,7 +29,6 @@ const TutorBooking = ({ tutorInfo, selectedPackage }: TutorBookingProps) => {
 
   const [isBooking, startBooking] = useTransition()
   const [isNavigateChatting, startNavigateChatting] = useTransition()
-  console.log('🚀 ~ TutorBooking ~ tutorInfo:', tutorInfo)
 
   const handleSubmit = () => {
     if (isBooking) return
