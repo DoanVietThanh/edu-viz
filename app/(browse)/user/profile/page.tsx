@@ -11,7 +11,7 @@ const UserProfilePage = () => {
   console.log('🚀 ~ UserProfilePage ~ user:', user)
   return (
     <div className='container '>
-      <h1 className='text-3xl rounded-xl w-max mb-8'>Sửa hồ sơ</h1>
+      <h1 className='text-3xl font-semibold font-serif w-max mb-8'>My profile</h1>
       <div className='flex gap-8 bg-white p-8 rounded-lg shadow-lg'>
         <div>
           <Image
@@ -27,9 +27,9 @@ const UserProfilePage = () => {
           <p className='flex items-center gap-2 font-semibold'>
             <Mail /> {user?.email}
           </p>
-          <div className='flex items-center text-coin gap-4'>
-            <Image src='/icons/coin.png' width={16} height={16} className='object-cover' alt='coin' />
-            {user?.balance}
+          <div className='flex items-center text-coin gap-4 text-xl font-semibold'>
+            <Image src='/icons/coin.png' width={30} height={30} className='object-cover' alt='coin' />
+            {user?.balance.toLocaleString()}
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ const RecommendStudents = () => {
         <Button variant='link'>Xem thêm</Button>
       </div>
       <div className='my-4 grid gap-8 md:grid-cols-2'>
-        <div className='flex cursor-pointer gap-8 rounded-md border p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-110'>
+        <div className='flex cursor-pointer gap-8 rounded-md border p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105'>
           <div className='flex items-center justify-between'>
             <Image src='/assets/avatar-student.jpg' alt='Avatar' width={200} height={200} className='rounded-md' />
           </div>

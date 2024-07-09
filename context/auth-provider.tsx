@@ -5,16 +5,19 @@ import { User } from '@prisma/client'
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
+type UserWithRole = User & { role: { id: string; roleName: string } }
+
 export type AuthContextType = {
-  user: User | null
+  user: UserWithRole | null
   isLoadingAuth: boolean
+  role?: string
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null)
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoadingAuth, setIsLoadingAuth] = useState(true)
-  const [currentUser, setCurrentUser] = useState<User | null>(null)
+  const [currentUser, setCurrentUser] = useState<UserWithRole | null>(null)
   useEffect(() => {
     async function fetchCurrentUser() {
       try {
@@ -34,7 +37,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     <AuthContext.Provider
       value={{
         user: currentUser,
-        isLoadingAuth
+        isLoadingAuth,
+        role: currentUser?.role?.roleName
       }}
     >
       {children}
