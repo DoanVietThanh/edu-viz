@@ -1,10 +1,12 @@
 'use client'
 
-import { accountNavlinks } from '@/constants/account-navlink'
+import { studentNavlinks, tutorNavlinks } from '@/constants/account-navlink'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
+
+import { useAuthContext } from '@/context/auth-provider'
 
 export default function UserPageLayout({
   children
@@ -12,11 +14,17 @@ export default function UserPageLayout({
   children: ReactNode
 }>) {
   const pathname = usePathname()
+  const { user, role, isLoadingAuth } = useAuthContext()
+  const navLinks = role == 'Student' ? studentNavlinks : tutorNavlinks
+
+  if (!user || isLoadingAuth) {
+    return null
+  }
 
   return (
     <div className='flex flex-1'>
       <div className='flex flex-col gap-4 w-1/6 h-full px-6 py-4'>
-        {accountNavlinks.map((link) => (
+        {navLinks.map((link) => (
           <Link
             key={link.name}
             href={link.href}
