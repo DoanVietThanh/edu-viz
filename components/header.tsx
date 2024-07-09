@@ -1,10 +1,28 @@
+'use client'
+
 import { Button } from './ui/button'
 import { Input } from './ui/input'
+import { accountNavlinks } from '@/constants/account-navlink'
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
-const Header = async () => {
+import { useAuthContext } from '@/context/auth-provider'
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+
+const Header = () => {
+  const { user, isLoadingAuth } = useAuthContext()
+  const router = useRouter()
+  console.log({ user, isLoadingAuth })
   return (
     <div className='fixed z-50 flex w-full items-center justify-between gap-4 border bg-white p-4 font-semibold shadow-lg'>
       <div className='flex items-center gap-8'>
@@ -23,7 +41,21 @@ const Header = async () => {
       </div>
 
       <SignedIn>
-        <UserButton />
+        <div className='flex items-center gap-4'>
+          <DropdownMenu>
+            <DropdownMenuTrigger>My Application</DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {accountNavlinks.map((link, index) => (
+                <DropdownMenuItem key={index} onClick={() => router.push(link.href)}>
+                  {link.name}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <UserButton />
+        </div>
       </SignedIn>
 
       <SignedOut>
