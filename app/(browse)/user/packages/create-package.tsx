@@ -1,10 +1,12 @@
 'use client'
 
+import { createPackage } from '@/actions/package/create-package'
 import { getSubjects } from '@/actions/subject/get-subjects'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from 'lucide-react'
 import { useEffect, useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
@@ -36,6 +38,7 @@ const formSchema = z.object({
 const CreatePackage = () => {
   const [subjects, setSubjects] = useState<any>(null)
   const [isLoadingSubject, startGetSubject] = useTransition()
+  const [isCreatePackageLoading, startCreatePackage] = useTransition()
 
   useEffect(() => {
     startGetSubject(async () => {
@@ -58,7 +61,16 @@ const CreatePackage = () => {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    startCreatePackage(async () => {
+      await createPackage(values)
+        .then((data) => {
+          console.log(data)
+          toast.success('Create package successfully')
+        })
+        .catch((error) => {
+          toast.error(error.message)
+        })
+    })
   }
 
   if (!subjects || isLoadingSubject) return 'Loading...'
@@ -148,7 +160,7 @@ const CreatePackage = () => {
                 )}
               />
               <div className='flex justify-end'>
-                <Button type='submit' variant={'primary'}>
+                <Button type='submit' variant={'primary'} disabled={isCreatePackageLoading}>
                   Submit
                 </Button>
               </div>

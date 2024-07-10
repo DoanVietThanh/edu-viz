@@ -13,18 +13,6 @@ export const studentNavlinks = [
     current: true,
     icons: <Wallet size={24} />
   },
-  // {
-  //   name: 'Settings',
-  //   href: '/user/setting',
-  //   current: false,
-  //   icons: <Settings size={24} />
-  // },
-  {
-    name: 'Packages',
-    href: '/user/packages',
-    current: false,
-    icons: <Package size={24} />
-  }
 ]
 
 export const tutorNavlinks = [
