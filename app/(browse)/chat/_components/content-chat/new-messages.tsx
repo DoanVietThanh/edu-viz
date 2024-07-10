@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { type MessageDetail } from "@/actions/chat/get-messages"
 import { type User } from "@prisma/client"
+
+import { type MessageDetail } from "@/actions/chat/get-messages"
 
 import { useSocket } from "../socket-provider"
 import MessagesGenerator from "./messages-generator"

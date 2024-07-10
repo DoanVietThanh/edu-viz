@@ -1,7 +1,8 @@
 import React from "react"
 import Image from "next/image"
-import { type MessageDetail } from "@/actions/chat/get-messages"
 import { type User } from "@prisma/client"
+
+import { type MessageDetail } from "@/actions/chat/get-messages"
 
 import Actions from "./actions"
 

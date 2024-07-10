@@ -1,9 +1,9 @@
 import React from "react"
 import Link from "next/link"
-import { type HubDetail } from "@/actions/chat/get-hub"
 import moment from "moment"
 
 import { cn } from "@/lib/utils"
+import { type HubDetail } from "@/actions/chat/get-hub"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Skeleton } from "@/components/ui/skeleton"
 

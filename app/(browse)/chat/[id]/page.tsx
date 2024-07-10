@@ -1,5 +1,6 @@
 import React, { Suspense } from "react"
 import { notFound } from "next/navigation"
+
 import { getHub } from "@/actions/chat/get-hub"
 
 import ContentChat, { ContentChatSkeleton } from "../_components/content-chat"

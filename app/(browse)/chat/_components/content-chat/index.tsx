@@ -1,7 +1,8 @@
 import React from "react"
-import { getMessages } from "@/actions/chat/get-messages"
 import { type User } from "@prisma/client"
 import { Loader2 } from "lucide-react"
+
+import { getMessages } from "@/actions/chat/get-messages"
 
 import MessagesGenerator from "./messages-generator"
 import NewMessages from "./new-messages"

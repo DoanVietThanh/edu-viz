@@ -9,7 +9,11 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 
-const TutorBreadcum = () => {
+type TutorBreadcumProps = {
+  tutorName: string
+}
+
+const TutorBreadcum = ({ tutorName }: TutorBreadcumProps) => {
   return (
     <div className="container">
       <Breadcrumb>
@@ -23,7 +27,7 @@ const TutorBreadcum = () => {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Tutor Name</BreadcrumbPage>
+            <BreadcrumbPage>{tutorName}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

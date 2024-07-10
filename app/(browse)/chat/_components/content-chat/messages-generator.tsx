@@ -1,9 +1,9 @@
 import React from "react"
 import Image from "next/image"
-import { type MessageDetail } from "@/actions/chat/get-messages"
 import { type User } from "@prisma/client"
 
 import { cn, formatMessageTime } from "@/lib/utils"
+import { type MessageDetail } from "@/actions/chat/get-messages"
 
 import ApproveMessage from "./approve-message"
 import CompleteMessage from "./complete-message"

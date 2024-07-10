@@ -1,11 +1,32 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { studentNavlinks, tutorNavlinks } from "@/constants/account-navlink"
+import { useAuthContext } from "@/context/auth-provider"
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
+import { MessageCircle } from "lucide-react"
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 
-const Header = async () => {
+const Header = () => {
+  const { user, isLoadingAuth, role } = useAuthContext()
+  const router = useRouter()
+  console.log({ user, isLoadingAuth, role })
+
+  const navLinks = role == "Student" ? studentNavlinks : tutorNavlinks
+
   return (
     <div className="fixed z-50 flex w-full items-center justify-between gap-4 border bg-white p-4 font-semibold shadow-lg">
       <div className="flex items-center gap-8">
@@ -20,11 +41,42 @@ const Header = async () => {
         </Link>
         <div className="text-[#7A37FF]">Trang chủ</div>
         <div>Tất cả dịch vụ</div>
-        <Link href="/chat/667ac5146a52284ec61b99e2">Chat</Link>
+        <Button asChild variant={"ghost"}>
+          <Link
+            href="/chat/667ac5146a52284ec61b99e2"
+            className="flex items-center font-semibold"
+          >
+            <MessageCircle size={20} className="mr-2" /> Chat
+          </Link>
+        </Button>
       </div>
 
       <SignedIn>
-        <UserButton />
+        <div className="flex items-center gap-4">
+          <DropdownMenu>
+            <Button
+              asChild
+              variant={"ghost"}
+              className="flex items-center gap-2 text-lg font-semibold"
+            >
+              <DropdownMenuTrigger>My Application</DropdownMenuTrigger>
+            </Button>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {navLinks.map((link, index) => (
+                <DropdownMenuItem
+                  key={index}
+                  onClick={() => router.push(link.href)}
+                  className="cursor-pointer"
+                >
+                  {link.name}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <UserButton />
+        </div>
       </SignedIn>
 
       <SignedOut>

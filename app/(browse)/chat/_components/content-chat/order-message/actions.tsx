@@ -1,10 +1,10 @@
 "use client"
 
 import React, { useTransition } from "react"
-import { approveOrder } from "@/actions/reservation/approve-order"
-import { rejectOrder } from "@/actions/reservation/reject-order"
 import { toast } from "sonner"
 
+import { approveOrder } from "@/actions/reservation/approve-order"
+import { rejectOrder } from "@/actions/reservation/reject-order"
 import { Button } from "@/components/ui/button"
 
 type Props = { reservationId: string }

@@ -3,9 +3,9 @@ import React from "react"
 import Footer from "@/components/footer"
 
 import Banner from "./_components/banner"
-import FieldCourse from "./_components/field-course"
 import RecommendStudents from "./_components/recommend-students"
 import RecommendTutors from "./_components/recommend-tutors"
+import SubjectList from "./_components/subject-list"
 
 const HomePage = () => {
   return (
@@ -14,7 +14,7 @@ const HomePage = () => {
         <Banner />
         <RecommendStudents />
         <RecommendTutors />
-        <FieldCourse />
+        <SubjectList />
       </div>
       <Footer />
     </div>

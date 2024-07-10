@@ -1,8 +1,9 @@
-import { type HubDetail } from "@/actions/chat/get-hub"
 import { SERVER_URL } from "@/constants/env-config"
 import { useAuth } from "@clerk/nextjs"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
+
+import { type HubDetail } from "@/actions/chat/get-hub"
 
 function useHubs() {
   const { getToken } = useAuth()

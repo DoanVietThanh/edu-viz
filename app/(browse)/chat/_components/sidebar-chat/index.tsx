@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
+
 import { type HubDetail } from "@/actions/chat/get-hub"
 import { type MessageDetail } from "@/actions/chat/get-messages"
-
 import useHubs from "@/hooks/use-hubs"
 import { Input } from "@/components/ui/input"
 

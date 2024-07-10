@@ -1,18 +1,34 @@
+import { getTutor } from "@/actions/tutor/get-tutor"
+import { getCurrentUser } from "@/actions/user/get-who-am-i"
 import Footer from "@/components/footer"
 
-import FeedbackList from "./feedback-list"
-import TutorBreadcum from "./tutor-breadcrum"
-import TutorComment from "./tutor-comment"
-import TutorInfo from "./tutor-info"
+import TutorBreadcum from "./_components/tutor-breadcrum"
+import TutorInfo from "./_components/tutor-info"
 
-const TutorDetailPage = () => {
+type TutorDetailPageProps = {
+  params: {
+    id: string
+  }
+  searchParams: {
+    subject: string
+  }
+}
+
+const TutorDetailPage = async ({
+  params,
+  searchParams,
+}: TutorDetailPageProps) => {
+  const tutorInfo = await getTutor(params.id)
+  const currentUser = await getCurrentUser()
+  if (!tutorInfo) {
+    return null
+  }
+  console.log("🚀 ~ TutorDetailPage ~ currentUser:", currentUser)
   return (
     <div>
       <div className="container my-4 flex flex-col gap-8">
-        <TutorBreadcum />
-        <TutorInfo />
-        <TutorComment />
-        <FeedbackList />
+        <TutorBreadcum tutorName={tutorInfo.fullName} />
+        <TutorInfo tutorInfo={tutorInfo} subjectName={searchParams.subject} />
       </div>
       <Footer />
     </div>
