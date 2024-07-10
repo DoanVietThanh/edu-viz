@@ -13,7 +13,8 @@ function RejectMessage({ message, otherUser }: Props) {
   return (
     <div className="flex min-h-full w-full flex-col gap-y-1 rounded-lg border-2 border-primary bg-muted p-4">
       <div className="font-bold">
-        {!isTutor ? otherUser.fullName : "You"} has rejected the reservation
+        {message.senderId === otherUser.id ? otherUser.fullName : "You"} has
+        rejected the reservation
       </div>
       <div className="flex flex-wrap items-center gap-1 text-sm font-bold text-muted-foreground">
         <div className="text-foreground">Order:</div>

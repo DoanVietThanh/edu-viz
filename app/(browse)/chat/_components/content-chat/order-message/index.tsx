@@ -37,7 +37,7 @@ function OrderMessage({ message, otherUser }: Props) {
         automatically canceled if {isTutor ? "you do" : "tutor does"} not
         respond within 1 hour.
       </p>
-      {isTutor && reservation.status === "Pending" && (
+      {reservation.status === "Pending" && (
         <Actions reservationId={reservation.id} />
       )}
     </div>

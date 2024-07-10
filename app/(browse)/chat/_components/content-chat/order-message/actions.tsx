@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useTransition } from "react"
+import { useAuthContext } from "@/context/auth-provider"
 import { toast } from "sonner"
 
 import { approveOrder } from "@/actions/reservation/approve-order"
@@ -12,6 +13,7 @@ type Props = { reservationId: string }
 function Actions({ reservationId }: Props) {
   const [isApproving, startApproveOrder] = useTransition()
   const [isRejecting, startRejectOrder] = useTransition()
+  const { user } = useAuthContext()
 
   const handleApproveOrder = () => {
     if (isApproving || isRejecting) return
@@ -48,14 +50,17 @@ function Actions({ reservationId }: Props) {
         disabled={isApproving || isRejecting}
         variant="outline"
       >
-        Reject
+        {user?.role.roleName === "Tutor" ? "Reject" : "Cancel Reservation"}
       </Button>
-      <Button
-        onClick={handleApproveOrder}
-        disabled={isApproving || isRejecting}
-      >
-        Approve
-      </Button>
+
+      {user?.role.roleName === "Tutor" && (
+        <Button
+          onClick={handleApproveOrder}
+          disabled={isApproving || isRejecting}
+        >
+          Approve
+        </Button>
+      )}
     </div>
   )
 }

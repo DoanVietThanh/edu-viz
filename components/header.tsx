@@ -42,10 +42,7 @@ const Header = () => {
         <div className="text-[#7A37FF]">Trang chủ</div>
         <div>Tất cả dịch vụ</div>
         <Button asChild variant={"ghost"}>
-          <Link
-            href="/chat/667ac5146a52284ec61b99e2"
-            className="flex items-center font-semibold"
-          >
+          <Link href="/chat" className="flex items-center font-semibold">
             <MessageCircle size={20} className="mr-2" /> Chat
           </Link>
         </Button>
