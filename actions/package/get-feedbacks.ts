@@ -1,8 +1,6 @@
 'use server'
 
-import { isBaseError } from '@/lib/utils'
 import { auth } from '@clerk/nextjs/server'
-import { revalidatePath } from 'next/cache'
 
 import { SERVER_URL } from '@/constants/env-config'
 

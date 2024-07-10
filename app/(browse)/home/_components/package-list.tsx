@@ -33,7 +33,7 @@ const PackageList = async ({ subjectName, subject }: PackageListProps) => {
           </Button>
         )}
       </div>
-      <div className='my-4 grid md:grid-cols-2 md:grid-cols-4 gap-8'>
+      <div className='my-4 grid md:grid-cols-4 gap-8'>
         {packages?.map((packageItem: PackageType) => (
           <Link href={`/tutor/${packageItem.tutorId}?subject=${packageItem.subject.name}`} key={packageItem.tutorId}>
             <div className='flex flex-col gap-8 p-4 border rounded-md shadow-md cursor-pointer hover:font-semibold hover:scale-105 transition-all ease-in-out duration-300'>
@@ -50,7 +50,8 @@ const PackageList = async ({ subjectName, subject }: PackageListProps) => {
               <div className='flex flex-col justify-start gap-4 text-sm'>
                 <p className='flex items-center gap-4 text-xl font-semibold'>{packageItem.tutor.fullName}</p>
                 <p>
-                  ⭐ {packageItem.averageFeedbacksValue.toFixed(2)} | Đơn đã nhận {packageItem.totalReservations}
+                  ⭐ {packageItem?.averageFeedbacksValue ? packageItem?.averageFeedbacksValue.toFixed(2) : 3} | Đơn đã
+                  nhận {packageItem?.totalReservations}
                 </p>
                 <div className='flex items-center text-coin gap-2'>
                   <Image src='/icons/coin.png' width={30} height={30} className='object-cover' alt='coin' />

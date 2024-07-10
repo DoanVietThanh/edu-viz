@@ -18,6 +18,7 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
   const [selectedPackage, setSelectedPackage] = useState(
     () => packagesTutor.filter((item: any) => item.subject.name === subjectName)[0]
   )
+  console.log('🚀 ~ TutorInfo ~ selectedPackage:', selectedPackage)
 
   return (
     <div className='flex flex-col gap-4'>
@@ -117,7 +118,12 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
                   {selectedPackage.pricePerHour} / hour
                 </div>
                 <div className='flex items-center gap-4'>
-                  <p className=''>⭐{selectedPackage.averageFeedbacksValue} </p>
+                  <p className=''>
+                    ⭐
+                    {Number.isInteger(selectedPackage.averageFeedbacksValue)
+                      ? selectedPackage.averageFeedbacksValue
+                      : 3}
+                  </p>
                   <p className='p-2 bg-green-400 rounded-xl text-white'>{selectedPackage.status}</p>
                 </div>
                 <p className='font-semibold'>Total Reservations {selectedPackage.totalReservations}</p>
