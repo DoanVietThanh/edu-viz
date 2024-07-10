@@ -25,7 +25,7 @@ export async function eduVizFetch<T>(
   input: string | URL | Request,
   init?: RequestInit | undefined
 ) {
-  const res = await fetch(input, init)
+  const res = await fetch(input, { ...init })
 
   if (res.ok) {
     if (res.status !== 400) return undefined
@@ -58,4 +58,15 @@ export function formatMessageTime(timestamp: number): string {
     options.year = "numeric"
     return date.toLocaleDateString("en-US", options)
   }
+}
+
+export function getErrorMessage(error: unknown): string {
+  let messageError = ""
+  if (!isBaseError(error) || error.statusCode === 500) {
+    messageError = "An unknown error occurred. Please try again later."
+  } else {
+    messageError = error.message
+  }
+
+  return messageError
 }
