@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache"
 import { SERVER_URL } from "@/constants/env-config"
 import { auth } from "@clerk/nextjs/server"
 
-import { eduVizFetch, isBaseError } from "@/lib/utils"
+import { isBaseError } from "@/lib/utils"
 import { type TCompleteOrderSchema } from "@/lib/validation/reservation.revalidation"
 
 export const completeOrder = async ({
@@ -15,7 +15,7 @@ export const completeOrder = async ({
   const { getToken } = auth()
 
   try {
-    const data = await eduVizFetch<{ hubId: string }>(
+    const data = await fetch(
       `${SERVER_URL}/api/reservations/${reservationId}/complete`,
       {
         method: "PATCH",
@@ -25,10 +25,15 @@ export const completeOrder = async ({
         },
         body: JSON.stringify({ value, content }),
       }
-    )
+    ).then((res) => res.json())
 
     const hubId = data?.hubId
+
+    console.log({ hubId })
+
     revalidatePath(`/chat/${hubId}`)
+
+    console.log("Yessssssssss")
   } catch (error) {
     let messageError = ""
     if (!isBaseError(error) || error.statusCode === 500) {

@@ -4,13 +4,13 @@ import { revalidatePath } from "next/cache"
 import { SERVER_URL } from "@/constants/env-config"
 import { auth } from "@clerk/nextjs/server"
 
-import { eduVizFetch, isBaseError } from "@/lib/utils"
+import { isBaseError } from "@/lib/utils"
 
 export const approveOrder = async (reservationId: string) => {
   const { getToken } = auth()
 
   try {
-    const data = await eduVizFetch<{ hubId: string }>(
+    const data = await fetch(
       `${SERVER_URL}/api/reservations/${reservationId}/approve`,
       {
         method: "PATCH",
@@ -18,10 +18,15 @@ export const approveOrder = async (reservationId: string) => {
           Authorization: `Bearer ${await getToken()}`,
         },
       }
-    )
+    ).then((res) => res.json())
 
-    const hubId = data?.hubId
+    const hubId = data.hubId
+
+    console.log({ hubId })
+
     revalidatePath(`/chat/${hubId}`)
+
+    console.log("OKKKKKKKKK")
   } catch (error) {
     let messageError = ""
     if (!isBaseError(error) || error.statusCode === 500) {

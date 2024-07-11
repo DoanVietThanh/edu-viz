@@ -21,23 +21,6 @@ export function isBaseError(error: unknown): error is BaseError {
   )
 }
 
-export async function eduVizFetch<T>(
-  input: string | URL | Request,
-  init?: RequestInit | undefined
-) {
-  const res = await fetch(input, { ...init })
-
-  if (res.ok) {
-    if (res.status !== 400) return undefined
-
-    const data = (await res.json()) as T
-    return data
-  } else {
-    const error = (await res.json()) as unknown
-    throw error
-  }
-}
-
 export function formatMessageTime(timestamp: number): string {
   const now = new Date()
   const date = new Date(timestamp)
