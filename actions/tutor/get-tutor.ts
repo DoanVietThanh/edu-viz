@@ -12,6 +12,7 @@ export const getTutor = async (tutorId: string) => {
       headers: {
         Authorization: `Bearer ${await getToken()}`,
       },
+      cache: "no-store",
     }).then((res) => res.json())
     return tutor
   } catch (error) {

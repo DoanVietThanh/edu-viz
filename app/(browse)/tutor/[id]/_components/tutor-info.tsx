@@ -147,12 +147,6 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
                   {selectedPackage.pricePerHour} / hour
                 </div>
                 <div className="flex items-center gap-4">
-                  <p className="">
-                    ⭐
-                    {Number.isInteger(selectedPackage.averageFeedbacksValue)
-                      ? selectedPackage.averageFeedbacksValue
-                      : 3}
-                  </p>
                   <p className="rounded-xl bg-green-400 p-2 text-white">
                     {selectedPackage.status}
                   </p>
@@ -170,7 +164,6 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
         </div>
       </section>
 
-      {/* <TutorComment /> */}
       <FeedbackList selectedPackage={selectedPackage} />
     </div>
   )
