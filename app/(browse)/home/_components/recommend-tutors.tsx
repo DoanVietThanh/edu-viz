@@ -14,7 +14,7 @@ import {
 const RecommendTutors = () => {
   return (
     <div className="my-8">
-      <p className="text-2xl font-semibold">Đề xuất giảng viên ưu tú</p>
+      <p className="text-2xl font-semibold">Recommend tutors</p>
       <div className="my-8 flex justify-center">
         <Carousel
           opts={{

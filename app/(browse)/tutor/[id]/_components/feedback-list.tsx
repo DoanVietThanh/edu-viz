@@ -12,6 +12,7 @@ type FeedbackListProps = {
 
 const FeedbackList = ({ selectedPackage }: FeedbackListProps) => {
   const [feedbacks, setFeedbacks] = useState<any[]>([])
+  console.log("🚀 ~ FeedbackList ~ feedbacks:", feedbacks)
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
@@ -44,7 +45,17 @@ const FeedbackList = ({ selectedPackage }: FeedbackListProps) => {
                       {feedbackItem.student.fullName}
                     </div>
                     <div className="font-semibold">
-                      {new Date().toDateString()}
+                      {new Date(feedbackItem.feedback.createAt).toLocaleString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "numeric",
+                          hour12: true,
+                        }
+                      )}
                     </div>
                   </div>
                   <div className="italic">
@@ -55,10 +66,10 @@ const FeedbackList = ({ selectedPackage }: FeedbackListProps) => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
+              {/* <div className="flex items-center gap-4">
                 <Edit className="mr-2 size-6" />
                 <Trash className="size-6" />
-              </div>
+              </div> */}
             </div>
             <div className="flex gap-4 p-4 font-medium">
               {feedbackItem?.feedback?.content}

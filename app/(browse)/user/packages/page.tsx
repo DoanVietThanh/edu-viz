@@ -1,5 +1,7 @@
 import Image from "next/image"
 
+import { getTutor } from "@/actions/tutor/get-tutor"
+import { getCurrentUser } from "@/actions/user/get-who-am-i"
 import {
   Table,
   TableBody,
@@ -12,7 +14,9 @@ import {
 
 import CreatePackage from "./create-package"
 
-const UserPackagePage = () => {
+const UserPackagePage = async () => {
+  const currentUser = await getCurrentUser()
+  const tutorInfo = await getTutor(currentUser?.id)
   return (
     <div className="container">
       <div className="mb-6 flex items-center justify-between rounded-xl font-serif text-3xl">
@@ -26,45 +30,38 @@ const UserPackagePage = () => {
             <TableRow>
               <TableHead className="w-[100px]">No</TableHead>
               <TableHead>Subject</TableHead>
-              <TableHead className="text-center">Image</TableHead>
-              <TableHead className="text-center">Video</TableHead>
-              <TableHead className="text-right">Price per hour</TableHead>
-              <TableHead className="text-right">Num of students</TableHead>
-              <TableHead className="text-right">Total Revenue</TableHead>
+              <TableHead>Description</TableHead>
+              <TableHead>Price per hour</TableHead>
+              <TableHead className="text-center">Star Rating</TableHead>
+              <TableHead>Total Reservations</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="font-medium">1</TableCell>
-              <TableCell>React JS</TableCell>
-              <TableCell className="text-center">_</TableCell>
-              <TableCell className="text-center">_</TableCell>
-              <TableCell className="text-right">
-                <div className="flex items-center justify-end text-coin">
-                  <Image
-                    src="/icons/coin.png"
-                    width={16}
-                    height={16}
-                    className="object-cover"
-                    alt="coin"
-                  />
-                  {Number(2500).toLocaleString()}
-                </div>
-              </TableCell>
-              <TableCell className="text-right">5</TableCell>
-              <TableCell className="text-right">
-                <div className="flex items-center justify-end gap-2 font-semibold text-coin">
-                  <Image
-                    src="/icons/coin.png"
-                    width={16}
-                    height={16}
-                    className="object-cover"
-                    alt="coin"
-                  />
-                  {Number(2500 * 5).toLocaleString()}
-                </div>
-              </TableCell>
-            </TableRow>
+            {tutorInfo.packages?.map((packageItem: any, index: number) => (
+              <TableRow key={packageItem.id}>
+                <TableCell className="font-medium">{index + 1}</TableCell>
+                <TableCell>{packageItem.subject.name}</TableCell>
+                <TableCell>{packageItem.subject.description}</TableCell>
+                <TableCell className="text-center">
+                  <div className="flex items-center justify-center gap-2 font-semibold text-coin">
+                    <Image
+                      src="/icons/coin.png"
+                      width={16}
+                      height={16}
+                      className="object-cover"
+                      alt="coin"
+                    />
+                    {Number(packageItem.pricePerHour).toLocaleString()}
+                  </div>
+                </TableCell>
+                <TableCell className="text-center">
+                  {isNaN(packageItem.starRating) ? 5 : packageItem.starRating}
+                </TableCell>
+                <TableCell className="text-center">
+                  {packageItem.totalReservations}
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>

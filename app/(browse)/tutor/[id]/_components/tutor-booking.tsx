@@ -74,11 +74,11 @@ const TutorBooking = ({ tutorInfo, selectedPackage }: TutorBookingProps) => {
     <div className="flex gap-4">
       <Sheet open={openBooking} onOpenChange={setOpenBooking}>
         <Button variant="default" asChild className="flex-1">
-          <SheetTrigger>Đặt đơn</SheetTrigger>
+          <SheetTrigger>Book Reservation</SheetTrigger>
         </Button>
         <SheetContent className="min-w-max">
           <SheetHeader>
-            <SheetTitle>Xác nhận đơn hàng</SheetTitle>
+            <SheetTitle>Confirm Reservation</SheetTitle>
             <SheetDescription>
               Date: {new Date().toLocaleString()}
             </SheetDescription>
@@ -96,13 +96,13 @@ const TutorBooking = ({ tutorInfo, selectedPackage }: TutorBookingProps) => {
             </div>
             <div className="mt-6 flex flex-col gap-4 rounded-xl bg-slate-200 p-4">
               <div className="flex items-center justify-between rounded-xl bg-white px-4 py-2">
-                <div>Dịch vụ</div>
+                <div>Services</div>
                 <div className="font-serif font-semibold">
                   {selectedPackage.subject.name}
                 </div>
               </div>
               <div className="flex items-center justify-between rounded-xl bg-white px-4 py-2">
-                <div>Đơn giá</div>
+                <div>Price</div>
                 <div className="flex items-center gap-2 text-coin">
                   <Image
                     src="/icons/coin.png"
@@ -115,7 +115,7 @@ const TutorBooking = ({ tutorInfo, selectedPackage }: TutorBookingProps) => {
                 </div>
               </div>
               <div className="flex items-center justify-between rounded-xl bg-white px-4 py-2">
-                <div>Số giờ</div>
+                <div>Hours</div>
                 <div>
                   <Input
                     type="number"
@@ -134,7 +134,7 @@ const TutorBooking = ({ tutorInfo, selectedPackage }: TutorBookingProps) => {
             </h1>
             <div className="flex flex-col gap-4 rounded-xl bg-slate-200 p-4">
               <div className="flex items-center justify-between rounded-xl bg-white px-4 py-2">
-                <div>Tổng giá trị</div>
+                <div>Total values</div>
                 <div className="flex items-center gap-2 text-coin">
                   <Image
                     src="/icons/coin.png"
@@ -147,7 +147,7 @@ const TutorBooking = ({ tutorInfo, selectedPackage }: TutorBookingProps) => {
                 </div>
               </div>
               <div className="flex items-center justify-between rounded-xl bg-white px-4 py-2">
-                <div>Tổng số giờ</div>
+                <div>Total hours</div>
                 <div>{duration}</div>
               </div>
             </div>

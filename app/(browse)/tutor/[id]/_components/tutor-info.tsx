@@ -23,8 +23,7 @@ type TutorInfoProps = {
 const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
   const packagesTutor = tutorInfo.packages
   const [selectedPackage, setSelectedPackage] = useState(
-    () =>
-      packagesTutor.filter((item: any) => item.subject.name === subjectName)[0]
+    packagesTutor.filter((item: any) => item.subject.name === subjectName)[0]
   )
   console.log("🚀 ~ TutorInfo ~ selectedPackage:", selectedPackage)
 
@@ -41,17 +40,14 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
           />
           <div className="flex flex-col">
             <p>
-              <span className="font-bold">Name</span> {tutorInfo.fullName}
-            </p>
-            <p>
-              <span className="font-bold">ID</span> {tutorInfo.id}
+              Name <span className="font-bold">{tutorInfo.fullName}</span>
             </p>
           </div>
         </div>
         <div className="flex gap-4">
-          <Button variant="outline">Chia sẻ</Button>
+          <Button variant="outline">Share</Button>
           <Button variant="default" className="">
-            Theo dõi
+            Follow
           </Button>
         </div>
       </section>
@@ -68,7 +64,7 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
         </div>
         <div className="flex flex-1 flex-col justify-between rounded-md border bg-white p-4 shadow-md">
           <div>
-            <p className="border-b-2 font-serif text-3xl">Kĩ năng</p>
+            <p className="border-b-2 font-serif text-3xl">Skills</p>
             <div className="flex justify-center">
               <Carousel
                 opts={{
@@ -85,7 +81,12 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
                       onClick={() => setSelectedPackage(packageItem)}
                     >
                       <div
-                        className={`flex cursor-pointer rounded-md border p-4 transition-all duration-300 ease-in-out hover:scale-110 ${packageItem.subject.name === subjectName ? "bg-[#8d6cd1] text-white" : ""}`}
+                        className={`flex cursor-pointer rounded-md border p-4 transition-all duration-300 ease-in-out hover:scale-110 ${
+                          selectedPackage.subject.name ===
+                          packageItem.subject.name
+                            ? "bg-purple-500 text-white"
+                            : ""
+                        }`}
                       >
                         <Image
                           src={
@@ -97,8 +98,10 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
                           height={60}
                           className="rounded-md"
                         />
-                        <div className="mx-2">
-                          <p className="">{packageItem.subject.name}</p>
+                        <div className="mx-2 overflow-auto">
+                          <p className="whitespace-nowrap">
+                            {packageItem.subject.name}
+                          </p>
                           <div className="flex items-center gap-2">
                             <Image
                               src="/icons/coin.png"
@@ -167,7 +170,7 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
         </div>
       </section>
 
-      <TutorComment />
+      {/* <TutorComment /> */}
       <FeedbackList selectedPackage={selectedPackage} />
     </div>
   )

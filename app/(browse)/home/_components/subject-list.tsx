@@ -8,7 +8,6 @@ const SubjectList = async () => {
 
   return (
     <div>
-      {" "}
       {subjects?.map((subject: any) => (
         <PackageList
           key={subject.id}

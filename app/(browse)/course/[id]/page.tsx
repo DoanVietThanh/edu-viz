@@ -65,7 +65,7 @@ const CourseDetailPage = ({ params }: CourseDetailPageProps) => {
             ))}
           </div>
           <div className="flex justify-center">
-            <Button>Xem thêm</Button>
+            <Button>More</Button>
           </div>
         </div>
       </div>
