@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { useAuthContext } from "@/context/auth-provider"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -14,13 +15,14 @@ import {
 
 import FeedbackList from "./feedback-list"
 import TutorBooking from "./tutor-booking"
-import TutorComment from "./tutor-comment"
 
 type TutorInfoProps = {
   tutorInfo: any
   subjectName: string
 }
 const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
+  const { role } = useAuthContext()
+  console.log("🚀 ~ TutorInfo ~ role:", role)
   const packagesTutor = tutorInfo.packages
   const [selectedPackage, setSelectedPackage] = useState(
     packagesTutor.filter((item: any) => item.subject.name === subjectName)[0]
@@ -45,8 +47,10 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
           </div>
         </div>
         <div className="flex gap-4">
-          <Button variant="outline">Share</Button>
-          <Button variant="default" className="">
+          <Button variant="outline" className="cursor-none">
+            Share
+          </Button>
+          <Button variant="default" className="cursor-none">
             Follow
           </Button>
         </div>
@@ -132,7 +136,7 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
                 height={100}
                 className="rounded-md"
               />
-              <div className="mx-2 font-semibold">
+              <div className="mx-2 flex flex-col gap-2 font-semibold">
                 <p className="text-3xl font-bold">
                   {selectedPackage.subject.name}
                 </p>
@@ -146,31 +150,26 @@ const TutorInfo = ({ tutorInfo, subjectName }: TutorInfoProps) => {
                   />
                   {selectedPackage.pricePerHour} / hour
                 </div>
-                <div className="flex items-center gap-4">
-                  <p className="">
-                    ⭐
-                    {Number.isInteger(selectedPackage.averageFeedbacksValue)
-                      ? selectedPackage.averageFeedbacksValue
-                      : 3}
-                  </p>
+                {/* <div className="flex items-center gap-4">
                   <p className="rounded-xl bg-green-400 p-2 text-white">
                     {selectedPackage.status}
                   </p>
-                </div>
+                </div> */}
                 <p className="font-semibold">
                   Total Reservations {selectedPackage.totalReservations}
                 </p>
               </div>
             </div>
           </div>
-          <TutorBooking
-            tutorInfo={tutorInfo}
-            selectedPackage={selectedPackage}
-          />
+          {role !== "Admin" && (
+            <TutorBooking
+              tutorInfo={tutorInfo}
+              selectedPackage={selectedPackage}
+            />
+          )}
         </div>
       </section>
 
-      {/* <TutorComment /> */}
       <FeedbackList selectedPackage={selectedPackage} />
     </div>
   )

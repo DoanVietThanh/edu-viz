@@ -1,5 +1,7 @@
 import React from "react"
+import Image from "next/image"
 
+import { getAllUsers } from "@/actions/user/get-all-users"
 import {
   Table,
   TableBody,
@@ -10,7 +12,17 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const ManageUsers = () => {
+const ManageUsers = async () => {
+  const allUsers = await getAllUsers()
+  console.log("🚀 ~ ManageUsers ~ allUsers:", allUsers)
+  function isValidUrl(url: string) {
+    try {
+      new URL(url)
+      return true
+    } catch (error) {
+      return false
+    }
+  }
   return (
     <div className="container p-4">
       <h1 className="w-max rounded-xl font-serif text-xl">Manage Users</h1>
@@ -18,19 +30,46 @@ const ManageUsers = () => {
         <TableCaption>A list of users.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead className="w-[100px]">No</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Fullname</TableHead>
+            <TableHead className="text-center">Avatar</TableHead>
+            <TableHead className="text-center">Balance</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-          </TableRow>
+          {allUsers?.map((user: any, index: number) => (
+            <TableRow key={user.id}>
+              <TableCell className="font-medium">{index + 1}</TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.fullName}</TableCell>
+              <TableCell className="text-center">
+                <Image
+                  width={50}
+                  height={50}
+                  src={
+                    isValidUrl(user.avatar)
+                      ? user.avatar
+                      : "/assets/avatar-tutor-3.png"
+                  }
+                  alt="avatar"
+                  className="size-10 rounded-full"
+                />
+              </TableCell>
+              <TableCell className="text-center">
+                <div className="flex items-center justify-center gap-2 text-coin">
+                  <Image
+                    src="/icons/coin.png"
+                    width={16}
+                    height={16}
+                    className="object-cover"
+                    alt="coin"
+                  />
+                  {user.balance.toLocaleString()}
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>

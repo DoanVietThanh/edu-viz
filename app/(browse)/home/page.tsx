@@ -12,8 +12,8 @@ const HomePage = () => {
     <div>
       <div className="container">
         <Banner />
-        <RecommendStudents />
-        <RecommendTutors />
+        {/* <RecommendStudents />
+        <RecommendTutors /> */}
         <SubjectList />
       </div>
       <Footer />

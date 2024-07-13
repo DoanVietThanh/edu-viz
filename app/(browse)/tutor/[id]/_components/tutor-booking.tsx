@@ -34,12 +34,13 @@ const TutorBooking = ({ tutorInfo, selectedPackage }: TutorBookingProps) => {
     if (isBooking) return
     startBooking(async () => {
       await bookReservation(selectedPackage.id, duration)
-        .then((res) => {
-          toast.success(res.message || "Đặt đơn hàng thành công")
+        .then(() => {
+          toast.success("Book reservation successfully")
+          router.push("/chat")
           setOpenBooking(false)
         })
-        .catch((error: Error) => {
-          toast.error(error.message)
+        .catch((error) => {
+          toast.error(error.message || "Book reservation Fail")
         })
     })
   }
@@ -71,7 +72,7 @@ const TutorBooking = ({ tutorInfo, selectedPackage }: TutorBookingProps) => {
   }
 
   return (
-    <div className="flex gap-4">
+    <div className="mt-4 flex gap-4">
       <Sheet open={openBooking} onOpenChange={setOpenBooking}>
         <Button variant="default" asChild className="flex-1">
           <SheetTrigger>Book Reservation</SheetTrigger>

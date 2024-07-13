@@ -40,7 +40,7 @@ const ManagePackages = async () => {
             <TableHead>Status</TableHead>
             <TableHead className="text-center">Reservations</TableHead>
             <TableHead className="text-center">Rating</TableHead>
-            <TableHead className="text-center">Action</TableHead>
+            {/* <TableHead className="text-center">Action</TableHead> */}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -72,7 +72,7 @@ const ManagePackages = async () => {
               <TableCell className="text-center font-bold">
                 ⭐ {packageItem.averageFeedbacksValue || "__"}
               </TableCell>
-              <TableCell className="text-center">
+              {/* <TableCell className="text-center">
                 <DropdownMenu>
                   <DropdownMenuTrigger>
                     <EllipsisVertical className="size-4" />
@@ -86,7 +86,7 @@ const ManagePackages = async () => {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>

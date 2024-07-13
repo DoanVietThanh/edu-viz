@@ -22,11 +22,7 @@ export const approveOrder = async (reservationId: string) => {
 
     const hubId = data.hubId
 
-    console.log({ hubId })
-
     revalidatePath(`/chat/${hubId}`)
-
-    console.log("OKKKKKKKKK")
   } catch (error) {
     let messageError = ""
     if (!isBaseError(error) || error.statusCode === 500) {

@@ -34,7 +34,7 @@ const ManageSubjects = async () => {
             <TableHead className="w-[100px]">No</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Description</TableHead>
-            <TableHead className="text-center">Action</TableHead>
+            {/* <TableHead className="text-center">Action</TableHead> */}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -45,7 +45,7 @@ const ManageSubjects = async () => {
               <TableCell className="line-clamp-none w-[30vw] text-ellipsis">
                 {subject.description || "_"}
               </TableCell>
-              <TableCell className="text-center">
+              {/* <TableCell className="text-center">
                 <DropdownMenu>
                   <DropdownMenuTrigger>
                     <EllipsisVertical className="size-4" />
@@ -59,7 +59,7 @@ const ManageSubjects = async () => {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>

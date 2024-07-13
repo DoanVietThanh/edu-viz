@@ -44,24 +44,14 @@ const formSchema = z.object({
     .int()
     .min(50)
     .max(500)
-    .transform((data) => {
-      return data - (data % 50)
-    }),
+    .transform((data) => data - (data % 50)),
 })
+
 const CreatePackage = () => {
   const [subjects, setSubjects] = useState<any>(null)
   const [isLoadingSubject, startGetSubject] = useTransition()
   const [isCreatePackageLoading, startCreatePackage] = useTransition()
-
-  useEffect(() => {
-    startGetSubject(async () => {
-      await getSubjects().then((data) => {
-        console.log(data)
-        setSubjects(data)
-      })
-    })
-  }, [])
-
+  const [isShowForm, setIsShowForm] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -72,16 +62,30 @@ const CreatePackage = () => {
     },
   })
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    startCreatePackage(async () => {
-      await createPackage(values)
+  useEffect(() => {
+    startGetSubject(async () => {
+      await getSubjects()
         .then((data) => {
-          console.log(data)
-          toast.success("Create package successfully")
+          setSubjects(data)
         })
         .catch((error) => {
-          toast.error(error.message)
+          console.log(error)
+        })
+    })
+    form.reset()
+  }, [form])
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    startCreatePackage(async () => {
+      await createPackage(values)
+        .then(() => {
+          toast.success("Create package successfully")
+          form.reset()
+          setIsShowForm(false)
+        })
+        .catch((error) => {
+          console.log("🚀 ~ startCreatePackage ~ error:", error)
+          toast.error(error.message || "Package already exists")
         })
     })
   }
@@ -89,7 +93,7 @@ const CreatePackage = () => {
   if (!subjects || isLoadingSubject) return "Loading..."
 
   return (
-    <Dialog>
+    <Dialog open={isShowForm} onOpenChange={setIsShowForm}>
       <Button asChild variant={"primary"} className="flex gap-2">
         <DialogTrigger>
           <PlusCircle size={18} /> Create
