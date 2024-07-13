@@ -21,17 +21,18 @@ const PackageList = async ({ subjectName, subject }: PackageListProps) => {
       return false
     }
   }
+
   return (
     <div className="my-8" key={subject.id}>
       <div className="flex items-center justify-between">
         <p className="text-2xl font-semibold">
           {subject.name} {`(${packages.length})`}
         </p>
-        {packages?.length > 0 && (
+        {/* {packages?.length > 0 && (
           <Button variant="link" asChild>
             <Link href={`/course/${subject.id}`}>Xem thêm</Link>
           </Button>
-        )}
+        )} */}
       </div>
       <div className="my-4 grid gap-8 md:grid-cols-4">
         {packages?.map((packageItem: PackageType) => (

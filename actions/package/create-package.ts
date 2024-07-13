@@ -24,7 +24,6 @@ export const createPackage = async (data: TCreatePackage) => {
 
   if (!packages.ok) {
     const errors = await packages.json()
-    console.log(errors.message)
     throw new Error(errors.message)
   }
   revalidatePath(`/user/packages`)

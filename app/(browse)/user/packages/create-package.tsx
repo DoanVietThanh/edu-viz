@@ -66,7 +66,6 @@ const CreatePackage = () => {
     startGetSubject(async () => {
       await getSubjects()
         .then((data) => {
-          console.log(data)
           setSubjects(data)
         })
         .catch((error) => {

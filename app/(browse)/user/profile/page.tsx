@@ -7,7 +7,6 @@ import { Mail } from "lucide-react"
 
 const UserProfilePage = () => {
   const { user } = useAuthContext()
-  console.log("🚀 ~ UserProfilePage ~ user:", user)
   return (
     <div className="container">
       <h1 className="mb-8 w-max font-serif text-3xl font-semibold">

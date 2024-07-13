@@ -24,7 +24,7 @@ const Header = () => {
   const { user, isLoadingAuth, role } = useAuthContext()
   const router = useRouter()
   console.log({ user, isLoadingAuth, role })
-
+  const isAdmin = role == "Admin"
   const navLinks = role == "Student" ? studentNavlinks : tutorNavlinks
 
   return (
@@ -40,39 +40,50 @@ const Header = () => {
           />
           <div className="text-[#7A37FF]">Home Page</div>
         </Link>
-        <Button asChild variant={"ghost"}>
-          <Link href="/chat" className="flex items-center font-semibold">
-            <MessageCircle size={20} className="mr-2" /> Chat
-          </Link>
-        </Button>
+        {!isAdmin && (
+          <Button asChild variant={"ghost"}>
+            <Link href="/chat" className="flex items-center font-semibold">
+              <MessageCircle size={20} className="mr-2" /> Chat
+            </Link>
+          </Button>
+        )}
       </div>
 
       <SignedIn>
-        <div className="flex items-center gap-4">
-          <DropdownMenu>
-            <Button
-              asChild
-              variant={"ghost"}
-              className="flex items-center gap-2 text-lg font-semibold"
-            >
-              <DropdownMenuTrigger>My Application</DropdownMenuTrigger>
-            </Button>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {navLinks.map((link, index) => (
-                <DropdownMenuItem
-                  key={index}
-                  onClick={() => router.push(link.href)}
-                  className="cursor-pointer"
-                >
-                  {link.name}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <UserButton />
-        </div>
+        {isAdmin ? (
+          <div className="flex items-center gap-4">
+            <Link href="/admin" className="flex items-center gap-4">
+              Admin
+            </Link>
+            <UserButton />
+          </div>
+        ) : (
+          <div className="flex items-center gap-4">
+            <DropdownMenu>
+              <Button
+                asChild
+                variant={"ghost"}
+                className="flex items-center gap-2 text-lg font-semibold"
+              >
+                <DropdownMenuTrigger>My Application</DropdownMenuTrigger>
+              </Button>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {navLinks.map((link, index) => (
+                  <DropdownMenuItem
+                    key={index}
+                    onClick={() => router.push(link.href)}
+                    className="cursor-pointer"
+                  >
+                    {link.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <UserButton />
+          </div>
+        )}
       </SignedIn>
 
       <SignedOut>

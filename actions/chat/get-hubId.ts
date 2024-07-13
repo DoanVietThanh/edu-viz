@@ -18,8 +18,6 @@ export const getHubId = async (otherUserId: string) => {
       }
     ).then((res) => res.json())
 
-    console.log({ hubId })
-
     return hubId
   } catch (error) {
     let messageError = ""

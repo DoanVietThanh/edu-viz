@@ -29,11 +29,9 @@ export const completeOrder = async ({
 
     const hubId = data?.hubId
 
-    console.log({ hubId })
 
     revalidatePath(`/chat/${hubId}`)
 
-    console.log("Yessssssssss")
   } catch (error) {
     let messageError = ""
     if (!isBaseError(error) || error.statusCode === 500) {
