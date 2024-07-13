@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <div className="fixed z-50 flex w-full items-center justify-between gap-4 border bg-white p-4 font-semibold shadow-lg">
       <div className="flex items-center gap-8">
-        <Link href="/home">
+        <Link href="/home" className="flex items-center gap-4">
           <Image
             src="/assets/logo.png"
             alt="logo"
@@ -38,9 +38,8 @@ const Header = () => {
             height={40}
             className="rounded-xl transition-all duration-300 ease-in-out hover:scale-110"
           />
+          <div className="text-[#7A37FF]">Home Page</div>
         </Link>
-        <div className="text-[#7A37FF]">Trang chủ</div>
-        <div>Tất cả dịch vụ</div>
         <Button asChild variant={"ghost"}>
           <Link href="/chat" className="flex items-center font-semibold">
             <MessageCircle size={20} className="mr-2" /> Chat

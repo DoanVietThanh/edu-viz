@@ -7,8 +7,8 @@ const RecommendStudents = () => {
   return (
     <div className="container mt-8">
       <div className="flex items-center justify-between">
-        <p className="text-2xl font-semibold">Tìm bạn học</p>
-        <Button variant="link">Xem thêm</Button>
+        <p className="text-2xl font-semibold">Find partners</p>
+        <Button variant="link">More</Button>
       </div>
       <div className="my-4 grid gap-8 md:grid-cols-2">
         <div className="flex cursor-pointer gap-8 rounded-md border p-4 shadow-md transition-all duration-300 ease-in-out hover:scale-105">

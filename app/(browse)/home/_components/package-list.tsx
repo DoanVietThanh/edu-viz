@@ -58,12 +58,10 @@ const PackageList = async ({ subjectName, subject }: PackageListProps) => {
                 <p className="flex items-center gap-4 text-xl font-semibold">
                   {packageItem.tutor.fullName}
                 </p>
-                <p>
-                  ⭐{" "}
-                  {packageItem?.averageFeedbacksValue
-                    ? packageItem?.averageFeedbacksValue.toFixed(2)
-                    : 3}{" "}
-                  | Đơn đã nhận {packageItem?.totalReservations}
+                <p className="font-semibold">
+                  {packageItem?.averageFeedbacksValue &&
+                    `⭐ ${packageItem?.averageFeedbacksValue.toFixed(2)} | `}
+                  Received Booking {packageItem?.totalReservations}
                 </p>
                 <div className="flex items-center gap-2 text-coin">
                   <Image

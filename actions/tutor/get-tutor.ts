@@ -2,7 +2,6 @@
 
 import { SERVER_URL } from "@/constants/env-config"
 import { auth } from "@clerk/nextjs/server"
-import { type User } from "@prisma/client"
 
 import { isBaseError } from "@/lib/utils"
 
@@ -13,7 +12,7 @@ export const getTutor = async (tutorId: string) => {
       headers: {
         Authorization: `Bearer ${await getToken()}`,
       },
-    }).then((res) => res.json() as Promise<User>)
+    }).then((res) => res.json())
     return tutor
   } catch (error) {
     let messageError = ""
